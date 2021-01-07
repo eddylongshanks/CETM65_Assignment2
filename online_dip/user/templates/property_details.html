@@ -1,0 +1,69 @@
+{% extends "_layout.html" %}
+
+{% block title %}Property Details{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Property Details</h1>
+    <form action="{% url 'property_details' %}" method="POST">
+        {% csrf_token %}
+
+        {% if messages %}
+        <div class="error-summary" tabindex="-1">
+            <h2>There's been a problem</h2>
+            <ul class="text-danger">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="field">
+            <label class="field-label">Annual Income</label>
+            <!-- <span class="field-error"></span> -->
+            <div class="field-prefix-group">
+                <div>£</div>
+                <input type="text" class="form-control" id="annual-income" name="annual-income" />
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="field-label">Loan Amount</label>
+            <div class="field-prefix-group">
+                <div>£</div>
+                <input type="text" class="form-control" id="loan-amount" name="loan-amount" />
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="field-label">Property Value</label>
+            <div class="field-prefix-group">
+                <div>£</div>
+                <input type="text" class="form-control" id="property-value" name="property-value" />
+            </div>
+        </div>
+
+        <!-- <fieldset>
+            <legend>
+                <label asp-for="MortgageType" class="field-label"></label>
+            </legend>
+            <span asp-validation-for="MortgageType" class="field-error"></span>
+            <div class="field-radio-button">
+                @Html.RadioButtonFor(m => m.MortgageType, MortgageTypeEnum.NewHouse, new { @id = "mortgage-type-new-house" })
+                <label for="mortgage-type-new-house">New House</label>
+            </div>
+            <div class="field-radio-button">
+                @Html.RadioButtonFor(m => m.MortgageType, MortgageTypeEnum.Remortgage, new { @id = "mortgage-type-remortgage" })
+                <label for="mortgage-type-remortgage">Remortgage</label>
+            </div>
+        </fieldset> -->
+
+        <div class="field">
+            <button type="submit" id="submit">Submit</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
