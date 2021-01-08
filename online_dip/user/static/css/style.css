@@ -1,8 +1,8 @@
 ﻿/* Debug */
 
-/*div {
+/* div, ul, p {
     border: 1px solid black;
-}*/
+} */
 
 /* Global Styles */
 
@@ -81,6 +81,8 @@ input {
     width: 100%;
     font-size: 1.125em;
     filter: none;
+    background: #fff;
+    border: 2px solid #555;
 }
 
 h1 {
@@ -115,11 +117,6 @@ a.button {
         background: #044A75;
     }
 
-input {
-    background: #fff;
-    border: 2px solid #555;
-}
-
 .input-validation-error {
     border: 3px solid #d4351c;
 }
@@ -143,7 +140,8 @@ a {
         color: #fff;
     }
 
-.field {
+.form-fields p {
+    margin-top: 0;
     margin-bottom: 30px;
 }
 
@@ -198,7 +196,7 @@ a {
         box-shadow: 0 0 0 2px #ffbf47;
     }
 
-.field-label {
+.form-fields p label {
     display: block;
     font-weight: 700;
     line-height: 25px;
@@ -245,21 +243,17 @@ a {
     margin-bottom: 20px;    
 }
 
-.validation-summary-errors ul {
+.error-summary ul {
     padding: 0;
     margin: 0;
 }
 
-    .validation-summary-errors ul li {
+    .error-summary ul li {
         list-style: none;
         font-weight: bold;
         margin: 10px 0 0 0;
         line-height: 24px;
     }
-
-.validation-summary-valid {
-    display: none;
-}
 
 .error-summary h2 {
     color: #000;
@@ -272,17 +266,21 @@ a {
     font-weight: bold;
 }
 
-.field-error {
+.errorlist {
     color: #d4351c;
     font-weight: bold;
     display: block;
     background-image: url(../images/error_48px.svg);
-    margin: 10px 0;
+    margin: 0;
     background-position: left center;
     background-size: 31px;
     background-repeat: no-repeat;
     padding: 10px 0 10px 40px;
 }
+
+    .errorlist li {
+        list-style-type: none;
+    }
 
 .error-summary p {
     margin: 10px 0 0 0;
