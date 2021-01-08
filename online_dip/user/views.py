@@ -30,7 +30,7 @@ def customer_details(request):
     else:
         form = CustomerDetailsForm(use_required_attribute=False)
 
-    return render(request, "customer_details.html", {"form": form.as_p})
+    return render(request, "customer_details.html", {"form": form})
 
 
 # def customer_details(request):
@@ -98,4 +98,4 @@ def property_details(request):
     else:
         form = PropertyDetailsForm(use_required_attribute=False)
 
-    return render(request, "property_details.html", {"form": form.as_p})
+    return render(request, "property_details.html", {"form": form})
