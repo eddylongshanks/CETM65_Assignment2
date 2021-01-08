@@ -2,15 +2,21 @@
 Test file for Client tests
 """
 
-from django.test import Client
-from django.test import TestCase
+from django.test import TestCase, Client
 
 class TestClientCreateEnquiry(TestCase):
+    """
+    Test class to create enquiry using client
+    """
 
     def setUp(self):
         self.client = Client()
-    
+
     def test_create_enquiry_by_client_with_all_valid_fields_should_create_entry_in_db(self):
+        """
+        Creates a full Enquiry using the Client
+        """
+
         response = self.client.post('/customer_details/',
             {
                 'first_name': 'client_firstname',
@@ -34,5 +40,5 @@ class TestClientCreateEnquiry(TestCase):
         #         'property_value': '500',
         #         'mortgage_type': 'RM'
         #     })
-        
+
         # print(response.status_code)

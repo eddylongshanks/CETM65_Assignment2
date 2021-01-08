@@ -1,5 +1,5 @@
 """
-Test file for Create Enquiry user journey
+Test file for Create Enquiry user journey, with selenium
 """
 
 from selenium import webdriver
@@ -9,6 +9,9 @@ from ..models import Enquiry
 
 
 class TestJourneyCreateEnquiry(TestCase):
+    """
+    Test class to create enquiry using selenium
+    """
 
     def setUp(self):
         self.driver = webdriver.Chrome()
@@ -18,6 +21,10 @@ class TestJourneyCreateEnquiry(TestCase):
 
     # User Story: billy_testcase should be able to add himself as a new user
     def test_create_enquiry_with_all_valid_fields_should_create_entry_in_db(self):
+        """
+        Creates a full Enquiry with valid input
+        """
+
         self.driver.get("http://127.0.0.1:8000/customer_details")
         self.assertIn("Customer Details", self.driver.title)
         first_name_field = self.driver.find_element_by_id("id_first_name")

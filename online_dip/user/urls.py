@@ -1,3 +1,7 @@
+"""
+url mapping for the enquiry creator
+"""
+
 from django.urls import path
 from . import views
 

@@ -45,7 +45,7 @@ def customer_details(request):
 #         for i, k in details.items():
 #             if k == "":
 #                 invalid_input.append(i)
-        
+
 #         if invalid_input:
 #             messages.add_message(
 #                 request, messages.WARNING, f"Following information is required: {', '.join(invalid_input)}")
@@ -56,7 +56,7 @@ def customer_details(request):
 #         #                  country=details['country'])
 
 #         # print(new_user)
-        
+
 #         # new_user.save()
 
 #         return redirect("property_details")
@@ -74,7 +74,7 @@ def property_details(request):
         if form.is_valid():
             customer_details_form = request.session['customer_details_form']
             enquiry = form.save(commit=False)
-            enquiry.first_name = customer_details_form['first_name']            
+            enquiry.first_name = customer_details_form['first_name']
             enquiry.last_name = customer_details_form['last_name']
             enquiry.address_building = customer_details_form['address_building']
             enquiry.address_street = customer_details_form['address_street']

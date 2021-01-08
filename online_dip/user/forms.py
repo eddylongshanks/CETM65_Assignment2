@@ -1,8 +1,16 @@
-from .models import Enquiry
+"""
+form classes for the enquiry creator
+"""
+
 from django.forms import ModelForm
+from .models import Enquiry
 
 
 class CustomerDetailsForm(ModelForm):
+    """
+    Page 1 of the oDip Enquiry journey
+    """
+
     class Meta:
         model = Enquiry
         fields = ['first_name', 'last_name', 'address_building', 'address_street', 'address_town',
@@ -10,6 +18,10 @@ class CustomerDetailsForm(ModelForm):
 
 
 class PropertyDetailsForm(ModelForm):
+    """
+    Page 2 of the oDip Enquiry journey
+    """
+
     class Meta():
         model = Enquiry
         fields = ['annual_income', 'loan_amount', 'property_value', 'mortgage_type']
