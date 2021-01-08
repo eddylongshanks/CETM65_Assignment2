@@ -57,10 +57,11 @@ class Enquiry(models.Model):
         verbose_name="Mortgage Type"
     )
 
-    # Define __str__ that will be called when querying e.g. 'User.objects.all()'
+    # Smell[3]: refactor str
     def __str__(self):
         obj_str = f'First Name: {self.first_name}, ' \
                   f'Last Name: {self.last_name}, ' \
-                  f'Tel: {self.telephone_number}' \
+                  f'Tel: {self.telephone_number} ' \
+                  f'Income: {self.annual_income}' \
 
         return obj_str

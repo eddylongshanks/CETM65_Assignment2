@@ -2,11 +2,11 @@
 form classes for the enquiry creator
 """
 
-from django.forms import ModelForm
+from django import forms
 from .models import Enquiry
 
 
-class CustomerDetailsForm(ModelForm):
+class CustomerDetailsForm(forms.ModelForm):
     """
     Page 1 of the oDip Enquiry journey
     """
@@ -17,7 +17,7 @@ class CustomerDetailsForm(ModelForm):
         'address_county', 'address_postcode', 'telephone_number', 'email', 'preferred_time_to_call']
 
 
-class PropertyDetailsForm(ModelForm):
+class PropertyDetailsForm(forms.ModelForm):
     """
     Page 2 of the oDip Enquiry journey
     """
