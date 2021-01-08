@@ -1,16 +1,27 @@
+"""
+The main view file, handles all get and post requests to create an Enquiry.
+"""
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib import messages
 
-from .models import Enquiry
+# from .models import Enquiry
 from .forms import CustomerDetailsForm, PropertyDetailsForm
 
 
 def index(request):
+    """
+    Site index.
+    """
+
     return HttpResponse("Hello, world. You're at the user index.")
 
 
-def customer_details(request):    
+def customer_details(request):
+    """
+    Customer Details form, first page of Enquiry.
+    """
+
     if request.method =="POST":
         form = CustomerDetailsForm(request.POST, use_required_attribute=False)
         if form.is_valid():
@@ -54,6 +65,10 @@ def customer_details(request):
 
 
 def property_details(request):
+    """
+    Property Details form, second page of Enquiry.
+    """
+
     if request.method =="POST":
         form = PropertyDetailsForm(request.POST, use_required_attribute=False)
         if form.is_valid():
@@ -69,16 +84,16 @@ def property_details(request):
             enquiry.telephone_number = customer_details_form['telephone_number']
             enquiry.email = customer_details_form['email']
             enquiry.preferred_time_to_call = customer_details_form['preferred_time_to_call']
-            
+
             print(enquiry)
-            
+
             enquiry.save()
-            
+
             # new_enquiry = Enquiry(customer_details_form)
             # print(new_enquiry)
             # new_enquiry = Enquiry(property_details_form)
             # print(new_enquiry)
-                        
+
             return redirect("/")
     else:
         form = PropertyDetailsForm(use_required_attribute=False)
