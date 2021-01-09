@@ -67,12 +67,28 @@ header {
     width: 200px;
 }
 
+fieldset {
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    line-height: 1.5;
+}
+
 legend {
-    font-size: 1em;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin-bottom: .5rem;
+    line-height: inherit;
+    color: inherit;
+    white-space: normal;
 }
 
 label {
     display: block;
+    margin-bottom: .5rem;
 }
 
 input {
@@ -140,15 +156,14 @@ a {
         color: #fff;
     }
 
-.form-fields p {
-    margin-top: 0;
+.field {
     margin-bottom: 30px;
 }
 
 .field-radio-button {
     margin-left: 10px;
     width: auto;
-    position: relative;
+    position: relative;    
 }
 
     .field-radio-button input {
@@ -162,6 +177,7 @@ a {
         display: inline-block;
         padding-left: 10px;
         cursor: pointer;
+        margin-bottom: .5rem;
     }
 
 .field-radio-button label:before {
@@ -196,7 +212,7 @@ a {
         box-shadow: 0 0 0 2px #ffbf47;
     }
 
-.form-fields p label {
+.field-label {
     display: block;
     font-weight: 700;
     line-height: 25px;
@@ -266,7 +282,7 @@ a {
     font-weight: bold;
 }
 
-.errorlist {
+.field-error {
     color: #d4351c;
     font-weight: bold;
     display: block;
@@ -278,7 +294,7 @@ a {
     padding: 10px 0 10px 40px;
 }
 
-    .errorlist li {
+    .field-error li {
         list-style-type: none;
     }
 

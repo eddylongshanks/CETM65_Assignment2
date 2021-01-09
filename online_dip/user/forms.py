@@ -3,8 +3,14 @@ form classes for the enquiry creator
 """
 
 from django import forms
-from .models import Enquiry
+from .models import Customer, PersonalDetails, PropertyDetails, Address
 
+
+# class AddressForm(forms.ModelForm):
+
+#     class Meta:
+#         model = Address
+#         fields = ['building', 'street', 'town', 'county', 'postcode']
 
 class CustomerDetailsForm(forms.ModelForm):
     """
@@ -12,9 +18,11 @@ class CustomerDetailsForm(forms.ModelForm):
     """
 
     class Meta:
-        model = Enquiry
-        fields = ['first_name', 'last_name', 'address_building', 'address_street', 'address_town',
-        'address_county', 'address_postcode', 'telephone_number', 'email', 'preferred_time_to_call']
+        model = Customer
+        fields = ['address_id', 'first_name', 'last_name', 'building', 'street', 'town', 'county', 'postcode', 'telephone_number', 'email', 'preferred_time_to_contact']
+        widgets = {
+            'preferred_time_to_contact': forms.RadioSelect(),
+        }
 
 
 class PropertyDetailsForm(forms.ModelForm):
@@ -23,8 +31,11 @@ class PropertyDetailsForm(forms.ModelForm):
     """
 
     class Meta():
-        model = Enquiry
+        model = Customer
         fields = ['annual_income', 'loan_amount', 'property_value', 'mortgage_type']
+        widgets = {
+            'mortgage_type': forms.RadioSelect(),
+        }
 
 
 # class EnquiryForm(CustomerDetailsForm, PropertyDetailsForm):

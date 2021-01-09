@@ -13,10 +13,10 @@
     <form action="{% url 'customer_details' %}" method="POST">
         {% csrf_token %}
 
-        {% if form.errorlist %}
+        {% if form.errors %}
         <div class="error-summary" tabindex="-1">
             <h2>There's been a problem</h2>
-            <ul>
+            <ul>            
             {% for error in form.errors %}
                 <li>{{ error }}</li>
             {% endfor %}
@@ -24,81 +24,84 @@
         </div>
         {% endif %}
 
-        <div class="form-fields">
-            {{ form.as_p }}
-        </div>
+        <!-- <div class="form-fields">
+            {{ form }}
+        </div> -->
 
-<!-- 
+
         <div class="field">
             <label class="field-label">First Name</label>            
-            <input type="text" class="form-control" id="first_name" name="first_name" />
-        </div>  -->
-<!-- 
+            {{ form.first_name }}
+        </div> 
+
         <div class="field">
             <label class="field-label">Last Name</label>
-            <input type="text" class="form-control" id="last_name" name="last_name" />
-        </div> -->
-<!-- 
+            {{ form.last_name }}
+        </div>
+
         <h3>What is your Address?</h3>
 
         <div class="field">
-            <label asp-for="AddressBuilding" class="field-label"></label>
-            <span asp-validation-for="AddressBuilding" class="field-error"></span>
-            <input asp-for="AddressBuilding" id="address-building" />
+            <label class="field-label">Building and Street</label>
+            <!-- <span class="field-error"></span> -->
+            {{ form.building }}
         </div>
         <div class="field">
-            <span asp-validation-for="AddressStreet" class="field-error"></span>
-            <input asp-for="AddressStreet" id="address-street" />
+            <!-- <span class="field-error"></span> -->
+            {{ form.street }}
         </div>
         <div class="field">
-            <label asp-for="AddressTown" class="field-label"></label>
-            <span asp-validation-for="AddressTown" class="field-error"></span>
-            <input asp-for="AddressTown" id="address-town" />
+            <label class="field-label">Town or City</label>
+            <!-- <span class="field-error"></span> -->
+            {{ form.town }}
         </div>
         <div class="field">
-            <label asp-for="AddressCounty" class="field-label"></label>
-            <span asp-validation-for="AddressCounty" class="field-error"></span>
-            <input asp-for="AddressCounty" id="address-county" />
+            <label class="field-label">County</label>
+            <!-- <span class="field-error"></span> -->
+            {{ form.county }}
         </div>
         <div class="field">
-            <label asp-for="AddressPostCode" class="field-label"></label>
-            <span asp-validation-for="AddressPostCode" class="field-error"></span>
-            <input asp-for="AddressPostCode" id="address-postcode" />
+            <label class="field-label">Post Code</label>
+            <!-- <span class="field-error"></span> -->
+            {{ form.postcode }}
         </div>
         <div class="field">
-            <label asp-for="TelephoneNumber" class="field-label"></label>
-            <span asp-validation-for="TelephoneNumber" class="field-error"></span>
-            <input asp-for="TelephoneNumber" id="telephone-number" />
+            <label class="field-label">Telephone Number</label>
+            <!-- <span class="field-error"></span> -->
+            {{ form.telephone_number }}
         </div>
         <div class="field">
-            <label asp-for="EmailAddress" class="field-label"></label>
-            <span asp-validation-for="EmailAddress" class="field-error"></span>
+            <label class="field-label">Email Address</label>
+            <!-- <span class="field-error"></span> -->
             <div class="field-hint">The data collected here will only be used to fulfill this request.</div>
-            <input asp-for="EmailAddress" id="email" />
-        </div> -->
+            {{ form.email }}
+        </div>
 
-        <!-- <fieldset>
+        <!-- {{ form.preferred_time_to_contact }} -->
+
+
+        <fieldset>
             <Legend>
-                <label asp-for="PreferredTimeToCall" class="field-label"></label>
+                <label class="field-label">Preferred Time to Call</label>
             </Legend>
-            <span asp-validation-for="PreferredTimeToCall" class="field-error"></span>
+            <!-- <span class="field-error"></span> -->
             <div class="field-radio-button">
-                @Html.RadioButtonFor(m => m.PreferredTimeToCall, PreferredTime.Morning, new { @id = "time-to-call-early-morning" })
+                <input type="radio" name="preferred_time_to_contact" id="time-to-call-early-morning" value="M">
                 <label for="time-to-call-early-morning">9am - 12pm (Mon-Fri)</label>
             </div>
             <div class="field-radio-button">
-                @Html.RadioButtonFor(m => m.PreferredTimeToCall, PreferredTime.EarlyAfternoon, new { @id = "time-to-call-early-afternoon" })
+                <input type="radio" name="preferred_time_to_contact" id="time-to-call-early-afternoon" value="EA">
                 <label for="time-to-call-early-afternoon">12pm - 3pm (Mon-Fri)</label>
             </div>
             <div class="field-radio-button">
-                @Html.RadioButtonFor(m => m.PreferredTimeToCall, PreferredTime.LateAfternoon, new { @id = "time-to-call-late-afternoon" })
+                <input type="radio" name="preferred_time_to_contact" id="time-to-call-late-afternoon" value="LA">
                 <label for="time-to-call-late-afternoon">3pm - 5pm (Mon-Fri)</label>
             </div>
             <div class="field-radio-button">
-                @Html.RadioButtonFor(m => m.PreferredTimeToCall, PreferredTime.Saturday, new { @id = "time-to-call-saturday" })
+                <input type="radio" name="preferred_time_to_contact" id="time-to-call-saturday" value="S">
                 <label for="time-to-call-saturday">9am - 2pm (Sat)</label>
             </div>
-        </fieldset> -->
+        </fieldset>
 
         <div class="field">
             <button type="submit" id="next">Next</button>
