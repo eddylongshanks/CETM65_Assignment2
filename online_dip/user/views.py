@@ -5,7 +5,6 @@ The main view file, handles all get and post requests to create an Enquiry.
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import CustomerDetailsForm, PropertyDetailsForm, CustomerForm
-from .models import Customer
 from .helpers.providers import EnquiryProvider
 
 
@@ -51,14 +50,15 @@ def property_details(request):
             enquiry_data = EnquiryProvider()
             enquiry_data.add(property_details_data)
             enquiry_data.add(customer_details_data)
+            enquiry = enquiry_data.get_list()
 
             print(f"enquiry_data: {enquiry_data}")
 
-            enquiry = CustomerForm(enquiry_data.get_list())
-            if not enquiry.is_valid():
+            customer = CustomerForm(enquiry)
+            if not customer.is_valid():
                 return redirect("customer_details")
 
-            # enquiry.save()
+            # customer.save()
 
             return redirect("thank_you")
     else:
@@ -73,6 +73,7 @@ def property_details(request):
 def thank_you(request):
     return render(request, "thank_you.html")
 
+# remove
 
 def testroute(request):
     """
