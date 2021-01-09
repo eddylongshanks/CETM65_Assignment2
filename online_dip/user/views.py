@@ -4,8 +4,9 @@ The main view file, handles all get and post requests to create an Enquiry.
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import CustomerDetailsForm, PropertyDetailsForm
-from .models import Customer, Address
+from .forms import CustomerDetailsForm, PropertyDetailsForm, CustomerForm
+from .models import Customer
+from .helpers.providers import EnquiryProvider
 
 
 def index(request):
@@ -14,6 +15,59 @@ def index(request):
     """
 
     return HttpResponse("Hello, world. You're at the user index.")
+
+def testroute(request):
+    """
+    Test form
+    """
+    
+    cust = {
+        "first_name": "steve",
+        "last_name": "smith",
+        "telephone_number": "123",
+        "preferred_time_to_contact": "S",
+    }
+    prop = {
+        "annual_income": "2",
+        "loan_amount": "3",
+        "property_value": "4",
+        "mortgage_type": "RM",
+    }
+
+    custfull = {
+        "first_name": "steve",
+        "last_name": "smith",
+        "telephone_number": "123",
+        "preferred_time_to_contact": "S",
+        "annual_income": "2",
+        "loan_amount": "3",
+        "property_value": "4",
+        "mortgage_type": "RM",
+    }
+
+
+    cust_form = CustomerDetailsForm(cust).save(commit=False)
+    prop_form = PropertyDetailsForm(prop).save(commit=False)
+
+    customer_data = EnquiryProvider()
+    customer_data.add(cust)
+    customer_data.add(prop)
+    print(customer_data)
+
+    # enq = CustomerForm(custfull).save(commit=False)
+    
+
+
+
+    # print(enq)
+
+
+    # cust = Customer.objects.create(**cust, **prop)
+    # cust.save()
+    # print(cust)
+
+    return HttpResponse(customer_data)
+
 
 def customer_details(request):
     """
@@ -43,14 +97,21 @@ def property_details(request):
     if request.method =="POST":
         form = PropertyDetailsForm(request.POST, use_required_attribute=False)
         if form.is_valid():
-            customer_details_form = CustomerDetailsForm(request.session["customer_details"])
-            address = Address(customer_details_form.save())
+            property_details_data = form.cleaned_data
+            customer_details_data = request.session["customer_details"]
+            enquiry_data = EnquiryProvider()
+            enquiry_data.add(property_details_data)
+            enquiry_data.add(customer_details_data)
+
+            print(f"enquiry_data: {enquiry_data}")
+
+            enquiry = CustomerForm(enquiry_data.get_list()).save(commit=False)
+            print(enquiry)
 
 
-            full_enquiry = Customer(customer_details_form, form)
+
             # full_enquiry.address_id = address.address_id
             # foo = full_enquiry.save()
-            print(address)
             
             # full_enquiry.save()
        

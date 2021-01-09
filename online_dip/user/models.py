@@ -79,16 +79,15 @@ class PropertyDetails(models.Model):
 
         return obj_str
 
+
 class Customer(PersonalDetails, PropertyDetails):
     has_been_contacted = models.BooleanField(default=False)
-
-    # Smell[3]: refactor str
 
     def __str__(self):
         obj_str = f'Tel: {self.telephone_number}, ' \
                   f'First Name: {self.first_name}, ' \
                   f'Last Name: {self.last_name}, ' \
-                  f'Income: {self.annual_income}' \
-                  f'address id: {self.address_id}' \
+                  f'Income: {self.annual_income}, ' \
+                  f'Has been Contacted?: {self.has_been_contacted} ' \
 
         return obj_str

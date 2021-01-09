@@ -1,0 +1,37 @@
+{% extends "_layout.html" %}
+
+{% block title %}Customer Details{% endblock %}
+
+{% block content %}
+
+<!-- <span class="field-error field-validation-error" data-valmsg-for="FirstName" data-valmsg-replace="true">
+                <span id="first-name-error" class="">Please enter your First Name</span>
+            </span> -->
+
+<div class="container">
+    <h1>Customer Details</h1>
+    <form action="{% url 'customer' %}" method="POST">
+        {% csrf_token %}
+
+        {% if form.errors %}
+        <div class="error-summary" tabindex="-1">
+            <h2>There's been a problem</h2>
+            <ul>            
+            {% for error in form.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="form-fields">
+            {{ form }}
+        </div>
+
+        <div class="field">
+            <button type="submit" id="next">Next</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
