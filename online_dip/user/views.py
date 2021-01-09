@@ -16,11 +16,69 @@ def index(request):
 
     return HttpResponse("Hello, world. You're at the user index.")
 
+
+def customer_details(request):
+    """
+    Customer Details form, first page of Enquiry.
+    """
+
+    if request.method == "POST":
+        form = CustomerDetailsForm(request.POST, use_required_attribute=False)
+        if form.is_valid():
+            request.session["customer_details"] = form.cleaned_data
+            return redirect("property_details")
+    else:
+        form = CustomerDetailsForm(use_required_attribute=False)
+
+    context = {
+        "form": form
+    }
+    return render(request, "customer_details.html", context)
+
+
+def property_details(request):
+    """
+    Property Details form, second page of Enquiry.
+    """
+
+    if request.method =="POST":
+        form = PropertyDetailsForm(request.POST, use_required_attribute=False)
+        if form.is_valid():
+            property_details_data = form.cleaned_data
+            customer_details_data = request.session["customer_details"]
+            request.session["customer_details"] = {}
+
+            enquiry_data = EnquiryProvider()
+            enquiry_data.add(property_details_data)
+            enquiry_data.add(customer_details_data)
+
+            print(f"enquiry_data: {enquiry_data}")
+
+            enquiry = CustomerForm(enquiry_data.get_list())
+            if not enquiry.is_valid():
+                return redirect("customer_details")
+
+            # enquiry.save()
+
+            return redirect("thank_you")
+    else:
+        form = PropertyDetailsForm(use_required_attribute=False)
+
+    context = {
+        "form": form
+    }
+    return render(request, "property_details.html", context)
+
+
+def thank_you(request):
+    return render(request, "thank_you.html")
+
+
 def testroute(request):
     """
     Test form
     """
-    
+
     cust = {
         "first_name": "steve",
         "last_name": "smith",
@@ -67,68 +125,6 @@ def testroute(request):
     # print(cust)
 
     return HttpResponse(customer_data)
-
-
-def customer_details(request):
-    """
-    Customer Details form, first page of Enquiry.
-    """
-
-    if request.method == "POST":
-        form = CustomerDetailsForm(request.POST, use_required_attribute=False)
-        if form.is_valid():
-            request.session["customer_details"] = form.cleaned_data
-            return redirect("property_details")
-    else:
-        form = CustomerDetailsForm(use_required_attribute=False)
-
-    context = {
-        "form": form
-    }
-
-    return render(request, "customer_details.html", context)
-
-
-def property_details(request):
-    """
-    Property Details form, second page of Enquiry.
-    """
-
-    if request.method =="POST":
-        form = PropertyDetailsForm(request.POST, use_required_attribute=False)
-        if form.is_valid():
-            property_details_data = form.cleaned_data
-            customer_details_data = request.session["customer_details"]
-            enquiry_data = EnquiryProvider()
-            enquiry_data.add(property_details_data)
-            enquiry_data.add(customer_details_data)
-
-            print(f"enquiry_data: {enquiry_data}")
-
-            enquiry = CustomerForm(enquiry_data.get_list()).save(commit=False)
-            print(enquiry)
-
-
-
-            # full_enquiry.address_id = address.address_id
-            # foo = full_enquiry.save()
-            
-            # full_enquiry.save()
-       
-
-
-            # new_enquiry = Enquiry(customer_details_form)
-            # print(new_enquiry)
-            # new_enquiry = Enquiry(property_details_form)
-            # print(new_enquiry)
-
-            return redirect("/")
-    else:
-        form = PropertyDetailsForm(use_required_attribute=False)
-
-    return render(request, "property_details.html", {"form": form})
-
-
 
 
 
