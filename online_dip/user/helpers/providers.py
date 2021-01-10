@@ -16,7 +16,15 @@ class EnquiryProvider:
 
     def get_list(self):
         """ Return the list as a dictionary object """
+
         return self.data
+
+    # Smell[2]: needs testing
+    def get_email(self):
+        """ Return the email address """
+
+        email = self.data.get("email")
+        return email
 
     def __str__(self):
         return str(self.data)

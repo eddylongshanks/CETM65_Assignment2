@@ -3,9 +3,10 @@ The main view file, handles all get and post requests to create an Enquiry.
 """
 
 from django.shortcuts import render, redirect
-# from django.http import HttpResponse
+from django.http import HttpResponse
 from .forms import CustomerDetailsForm, PropertyDetailsForm, CustomerForm
 from .helpers.providers import EnquiryProvider
+from .helpers.mailer import EmailSender
 
 
 def customer_details(request):
@@ -58,6 +59,10 @@ def property_details(request):
 
             customer.save()
 
+            # Send a confirmation email to the customer only after saving the enquiry
+            mailer = EmailSender(enquiry_data.get_email())
+            mailer.send()
+
             return redirect("thank_you")
     else:
         form = PropertyDetailsForm(use_required_attribute=False)
@@ -77,6 +82,12 @@ def thank_you(request):
     return render(request, "thank_you.html")
 
 # to remove
+
+def emailtest(request):
+    mailer = EmailSender("chris@holmescentral.co.uk")
+
+    #mailer.send()
+    return HttpResponse(mailer)
 
 # def testroute(request):
 #     """

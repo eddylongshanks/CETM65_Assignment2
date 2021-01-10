@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0gr2hv$b1elyy5jmha!igkf!(=1c^&4*z07p(j_2*%#ppgx4r_'
+# SECRET_KEY = '0gr2hv$b1elyy5jmha!igkf!(=1c^&4*z07p(j_2*%#ppgx4r_'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -122,3 +124,12 @@ STATIC_URL = '/static/'
 
 # LOGIN_REDIRECT_URL = 'adviser-home'
 # LOGIN_URL = 'adviser-login'
+
+# Emailer Settings
+
+EMAIL_FROM = os.environ.get('DJANGO_EMAIL_FROM')
+EMAIL_HOST = os.environ.get('DJANGO_EMAIL_HOST')
+EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = os.environ.get('DJANGO_EMAIL_HOST_USER')
+EMAIL_PORT = os.environ.get('DJANGO_EMAIL_PORT')
+EMAIL_USE_SSL = True
