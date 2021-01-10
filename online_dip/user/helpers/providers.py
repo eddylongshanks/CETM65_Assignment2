@@ -16,6 +16,7 @@ class EnquiryProvider:
 
     def get_list(self):
         """ Return the list as a dictionary object """
+
         return self.data
 
     def __str__(self):

@@ -3,9 +3,10 @@ The main view file, handles all get and post requests to create an Enquiry.
 """
 
 from django.shortcuts import render, redirect
-# from django.http import HttpResponse
+from django.http import HttpResponse
 from .forms import CustomerDetailsForm, PropertyDetailsForm, CustomerForm
 from .helpers.providers import EnquiryProvider
+from .helpers.mailer import EmailSender
 
 
 def customer_details(request):
@@ -48,15 +49,19 @@ def property_details(request):
             enquiry_data = EnquiryProvider()
             enquiry_data.add(property_details_data)
             enquiry_data.add(customer_details_data)
-            enquiry = enquiry_data.get_list()
+            completed_data = enquiry_data.get_list()
 
-            customer = CustomerForm(enquiry)
+            enquiry = CustomerForm(completed_data)
 
             # Perform final validation, redirect to start if there is invalid data
-            if not customer.is_valid():
+            if not enquiry.is_valid():
                 return redirect("customer_details")
 
-            customer.save()
+            enquiry.save()
+
+            # Send a confirmation email to the customer only after saving the enquiry
+            mailer = EmailSender(enquiry_data.get_list())
+            mailer.send()
 
             return redirect("thank_you")
     else:
@@ -77,6 +82,18 @@ def thank_you(request):
     return render(request, "thank_you.html")
 
 # to remove
+
+def emailtest(request):
+
+    customer_details_data = {
+                'first_name': 'Katie',
+                'email': 'chris@holmescentral.co.uk',
+                'preferred_time_to_contact': 'S',
+            }
+    mailer = EmailSender(customer_details_data)
+
+    mailer.send()
+    return HttpResponse(mailer)
 
 # def testroute(request):
 #     """
