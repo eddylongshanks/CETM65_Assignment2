@@ -8,14 +8,6 @@ from .forms import CustomerDetailsForm, PropertyDetailsForm, CustomerForm
 from .helpers.providers import EnquiryProvider
 
 
-def index(request):
-    """
-    Site index.
-    """
-
-    return HttpResponse("Hello, world. You're at the user index.")
-
-
 def customer_details(request):
     """
     Customer Details form, first page of Enquiry.
@@ -42,6 +34,10 @@ def property_details(request):
     Property Details form, second page of Enquiry.
     """
 
+    # Session check to verify customer details are available
+    if not "customer_details" in request.session:
+        return redirect("customer_details")
+
     if request.method =="POST":
         form = PropertyDetailsForm(request.POST, use_required_attribute=False)
         if form.is_valid():
@@ -56,13 +52,13 @@ def property_details(request):
 
             customer = CustomerForm(enquiry)
 
-            # Perform final validation, redirect to start if there is missing data
+            # Perform final validation, redirect to start if there is invalid data
             if not customer.is_valid():
                 return redirect("customer_details")
 
             customer.save()
 
-            return redirect("thank_you",)
+            return redirect("thank_you")
     else:
         form = PropertyDetailsForm(use_required_attribute=False)
 
@@ -79,7 +75,7 @@ def thank_you(request):
 
     return render(request, "thank_you.html")
 
-# remove
+# to remove
 
 def testroute(request):
     """
@@ -125,90 +121,3 @@ def testroute(request):
     # print(cust)
 
     return HttpResponse(customer_data)
-
-
-
-# def customer_details(request):
-#     if request.method == "POST":        
-#         customer = Customer(request.POST)
-
-#         customer.address
-
-#         print(customer_form)
-
-#         # customer_form.save()
-#         return redirect("index")
-
-#     customer_form = Customer()
-
-#     context = {
-#         "form": customer_form
-#     }
-
-#     return render(request, "customer_details.html", context)
-
-
-    
-
-
-# def customer_details_old(request):
-#     """
-#     Customer Details form, first page of Enquiry.
-#     """
-
-#     if request.method == "POST":
-#         form = CustomerDetailsForm(request.POST, use_required_attribute=False)
-#         if form.is_valid():
-#             request.session["customer_details_form"] = form.cleaned_data
-#             return redirect("property_details")
-#     else:
-#         form = CustomerDetailsForm(use_required_attribute=False)
-
-#     context = {
-#         "form": form
-#     }
-
-#     return render(request, "customer_details.html", context)
-
-
-
-
-
-
-
-
-
-
-
-
-# def customer_details(request):
-#     if request.method == "POST":
-
-#         details = {}
-
-#         details['first-name'] = request.POST.get('first-name','')
-
-#         invalid_input = list()
-
-#         for i, k in details.items():
-#             if k == "":
-#                 invalid_input.append(i)
-
-#         if invalid_input:
-#             messages.add_message(
-#                 request, messages.WARNING, f"Following information is required: {', '.join(invalid_input)}")
-#             return render(request, "customer_details.html")
-
-#         # new_user = User(firstname=details['first-name'],
-#         #                  secondname=details['second-name'],
-#         #                  country=details['country'])
-
-#         # print(new_user)
-
-#         # new_user.save()
-
-#         return redirect("property_details")
-
-#     return render(request, "customer_details.html")
-
-

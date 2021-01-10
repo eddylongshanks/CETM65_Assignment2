@@ -6,7 +6,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
     # remove
     path('testroute/', views.testroute, name='testroute'),
     path('customer_details/', views.customer_details, name='customer_details'),
