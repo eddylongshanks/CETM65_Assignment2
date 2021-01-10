@@ -13,8 +13,8 @@
         <div class="error-summary" tabindex="-1">
             <h2>There's been a problem</h2>
             <ul>            
-            {% for error in form.errors %}
-                <li>{{ error }}</li>
+            {% for key, value in form.errors.items %}
+                <li>{{ value }}</li>
             {% endfor %}
             </ul>
         </div>

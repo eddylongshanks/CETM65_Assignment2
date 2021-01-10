@@ -25,6 +25,12 @@ class CustomerDetailsForm(forms.ModelForm):
             'preferred_time_to_contact': forms.RadioSelect(),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in self.fields.values():
+            field.error_messages = {'required' : f'{field.label} is required'}
+
 
 class PropertyDetailsForm(forms.ModelForm):
     """
@@ -37,12 +43,12 @@ class PropertyDetailsForm(forms.ModelForm):
         widgets = {
             'mortgage_type': forms.RadioSelect(),
         }
-        # to remove - or expand on
-        error_messages = {
-            'annual_income': {
-                'required': _("Provide your Annual Income"),
-            }
-        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in self.fields.values():
+            field.error_messages = {'required' : f'{field.label} is required'}
 
 
 class CustomerForm(forms.ModelForm):

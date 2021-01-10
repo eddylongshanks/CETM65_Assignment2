@@ -1,14 +1,15 @@
+"""
+Provider objects for building data sets 
+"""
 
 class EnquiryProvider:
     """
-    
+    Stores a dictionary list of form values to be retrieve later
+
     """
 
     def __init__(self):
         self.data = {}
-
-    def get_name(self, field_name):
-        return self.data.get(field_name)
 
     def add(self, data_to_add):
 

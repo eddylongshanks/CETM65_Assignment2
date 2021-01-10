@@ -33,6 +33,7 @@ def customer_details(request):
     context = {
         "form": form
     }
+
     return render(request, "customer_details.html", context)
 
 
@@ -53,17 +54,15 @@ def property_details(request):
             enquiry_data.add(customer_details_data)
             enquiry = enquiry_data.get_list()
 
-            print(f"enquiry_data: {enquiry_data}")
-
             customer = CustomerForm(enquiry)
 
-            # Perform final validation, to redirect to start if there is missing data
+            # Perform final validation, redirect to start if there is missing data
             if not customer.is_valid():
                 return redirect("customer_details")
 
             customer.save()
 
-            return redirect("thank_you")
+            return redirect("thank_you",)
     else:
         form = PropertyDetailsForm(use_required_attribute=False)
 
@@ -121,13 +120,6 @@ def testroute(request):
     print(customer_data)
 
     # enq = CustomerForm(custfull).save(commit=False)
-    
-
-
-
-    # print(enq)
-
-
     # cust = Customer.objects.create(**cust, **prop)
     # cust.save()
     # print(cust)
