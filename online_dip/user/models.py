@@ -7,7 +7,7 @@ from django.db import models
 
 class Address(models.Model):
     address_id = models.AutoField(primary_key=True)
-    building = models.CharField(max_length=50, blank=True, verbose_name="Building Name/Number")
+    building = models.CharField(max_length=50, blank=True, verbose_name="Building and Street")
     street = models.CharField(max_length=50, blank=True, verbose_name="Street")
     town = models.CharField(max_length=50, blank=True, verbose_name="Town")
     county = models.CharField(max_length=50, blank=True, verbose_name="County")

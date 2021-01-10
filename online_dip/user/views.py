@@ -58,7 +58,7 @@ def property_details(request):
             if not customer.is_valid():
                 return redirect("customer_details")
 
-            # customer.save()
+            customer.save()
 
             return redirect("thank_you")
     else:
