@@ -4,10 +4,6 @@
 
 {% block content %}
 
-<!-- <span class="field-error field-validation-error" data-valmsg-for="FirstName" data-valmsg-replace="true">
-                <span id="first-name-error" class="">Please enter your First Name</span>
-            </span> -->
-
 <div class="container">
     <h1>Customer Details</h1>
     <form action="{% url 'customer_details' %}" method="POST">
@@ -24,12 +20,8 @@
         </div>
         {% endif %}
 
-        <!-- <div class="form-fields">
-            {{ form }}
-        </div> -->
-
         <div class="field">
-            <label class="field-label">First Name</label>            
+            <label class="field-label">{{ form.first_name.label }}</label>
             {{ form.first_name }}
         </div> 
 
