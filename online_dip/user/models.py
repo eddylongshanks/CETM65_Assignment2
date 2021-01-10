@@ -3,6 +3,7 @@ models file for the enquiry creator
 """
 
 from django.db import models
+from django.utils import timezone
 
 
 class Address(models.Model):
@@ -81,7 +82,8 @@ class PropertyDetails(models.Model):
 
 
 class Customer(PersonalDetails, PropertyDetails):
-    has_been_contacted = models.BooleanField(default=False)
+    date_created = models.DateField(default=timezone.now(), verbose_name="Date Created")
+    has_been_contacted = models.BooleanField(default=False, verbose_name="Has been Contacted?")
 
     def __str__(self):
         obj_str = f'{self.first_name} {self.last_name} - ' \

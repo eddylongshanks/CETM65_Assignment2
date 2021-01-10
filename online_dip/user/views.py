@@ -24,6 +24,7 @@ def customer_details(request):
     if request.method == "POST":
         form = CustomerDetailsForm(request.POST, use_required_attribute=False)
         if form.is_valid():
+            # Save to the session to be retreived later
             request.session["customer_details"] = form.cleaned_data
             return redirect("property_details")
     else:
@@ -45,8 +46,8 @@ def property_details(request):
         if form.is_valid():
             property_details_data = form.cleaned_data
             customer_details_data = request.session["customer_details"]
-            request.session["customer_details"] = {}
 
+            # Consolidate data from other pages to prep for db entry
             enquiry_data = EnquiryProvider()
             enquiry_data.add(property_details_data)
             enquiry_data.add(customer_details_data)
@@ -55,6 +56,8 @@ def property_details(request):
             print(f"enquiry_data: {enquiry_data}")
 
             customer = CustomerForm(enquiry)
+
+            # Perform final validation, to redirect to start if there is missing data
             if not customer.is_valid():
                 return redirect("customer_details")
 
@@ -71,6 +74,10 @@ def property_details(request):
 
 
 def thank_you(request):
+
+    # Clean the session
+    request.session["customer_details"] = {}
+
     return render(request, "thank_you.html")
 
 # remove
