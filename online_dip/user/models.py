@@ -82,7 +82,7 @@ class PropertyDetails(models.Model):
 
 
 class Customer(PersonalDetails, PropertyDetails):
-    date_created = models.DateField(default=timezone.now(), verbose_name="Date Created")
+    date_created = models.DateField(default=timezone.now, verbose_name="Date Created")
     has_been_contacted = models.BooleanField(default=False, verbose_name="Has been Contacted?")
 
     def __str__(self):
