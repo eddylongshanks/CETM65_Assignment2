@@ -4,9 +4,8 @@ The main view file, handles all get and post requests to create an Enquiry.
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
-# from .models import Enquiry
-from .forms import CustomerDetailsForm, PropertyDetailsForm
+from .forms import CustomerDetailsForm, PropertyDetailsForm, CustomerForm
+from .helpers.providers import EnquiryProvider
 
 
 def index(request):
@@ -22,15 +21,172 @@ def customer_details(request):
     Customer Details form, first page of Enquiry.
     """
 
-    if request.method =="POST":
+    if request.method == "POST":
         form = CustomerDetailsForm(request.POST, use_required_attribute=False)
         if form.is_valid():
-            request.session["customer_details_form"] = form.cleaned_data
+            # Save to the session to be retreived later
+            request.session["customer_details"] = form.cleaned_data
             return redirect("property_details")
     else:
         form = CustomerDetailsForm(use_required_attribute=False)
 
-    return render(request, "customer_details.html", {"form": form})
+    context = {
+        "form": form
+    }
+    return render(request, "customer_details.html", context)
+
+
+def property_details(request):
+    """
+    Property Details form, second page of Enquiry.
+    """
+
+    if request.method =="POST":
+        form = PropertyDetailsForm(request.POST, use_required_attribute=False)
+        if form.is_valid():
+            property_details_data = form.cleaned_data
+            customer_details_data = request.session["customer_details"]
+
+            # Consolidate data from other pages to prep for db entry
+            enquiry_data = EnquiryProvider()
+            enquiry_data.add(property_details_data)
+            enquiry_data.add(customer_details_data)
+            enquiry = enquiry_data.get_list()
+
+            print(f"enquiry_data: {enquiry_data}")
+
+            customer = CustomerForm(enquiry)
+
+            # Perform final validation, to redirect to start if there is missing data
+            if not customer.is_valid():
+                return redirect("customer_details")
+
+            customer.save()
+
+            return redirect("thank_you")
+    else:
+        form = PropertyDetailsForm(use_required_attribute=False)
+
+    context = {
+        "form": form
+    }
+    return render(request, "property_details.html", context)
+
+
+def thank_you(request):
+
+    # Clean the session
+    request.session["customer_details"] = {}
+
+    return render(request, "thank_you.html")
+
+# remove
+
+def testroute(request):
+    """
+    Test form
+    """
+
+    cust = {
+        "first_name": "steve",
+        "last_name": "smith",
+        "telephone_number": "123",
+        "preferred_time_to_contact": "S",
+    }
+    prop = {
+        "annual_income": "2",
+        "loan_amount": "3",
+        "property_value": "4",
+        "mortgage_type": "RM",
+    }
+
+    custfull = {
+        "first_name": "steve",
+        "last_name": "smith",
+        "telephone_number": "123",
+        "preferred_time_to_contact": "S",
+        "annual_income": "2",
+        "loan_amount": "3",
+        "property_value": "4",
+        "mortgage_type": "RM",
+    }
+
+
+    cust_form = CustomerDetailsForm(cust).save(commit=False)
+    prop_form = PropertyDetailsForm(prop).save(commit=False)
+
+    customer_data = EnquiryProvider()
+    customer_data.add(cust)
+    customer_data.add(prop)
+    print(customer_data)
+
+    # enq = CustomerForm(custfull).save(commit=False)
+    
+
+
+
+    # print(enq)
+
+
+    # cust = Customer.objects.create(**cust, **prop)
+    # cust.save()
+    # print(cust)
+
+    return HttpResponse(customer_data)
+
+
+
+# def customer_details(request):
+#     if request.method == "POST":        
+#         customer = Customer(request.POST)
+
+#         customer.address
+
+#         print(customer_form)
+
+#         # customer_form.save()
+#         return redirect("index")
+
+#     customer_form = Customer()
+
+#     context = {
+#         "form": customer_form
+#     }
+
+#     return render(request, "customer_details.html", context)
+
+
+    
+
+
+# def customer_details_old(request):
+#     """
+#     Customer Details form, first page of Enquiry.
+#     """
+
+#     if request.method == "POST":
+#         form = CustomerDetailsForm(request.POST, use_required_attribute=False)
+#         if form.is_valid():
+#             request.session["customer_details_form"] = form.cleaned_data
+#             return redirect("property_details")
+#     else:
+#         form = CustomerDetailsForm(use_required_attribute=False)
+
+#     context = {
+#         "form": form
+#     }
+
+#     return render(request, "customer_details.html", context)
+
+
+
+
+
+
+
+
+
+
 
 
 # def customer_details(request):
@@ -64,38 +220,3 @@ def customer_details(request):
 #     return render(request, "customer_details.html")
 
 
-def property_details(request):
-    """
-    Property Details form, second page of Enquiry.
-    """
-
-    if request.method =="POST":
-        form = PropertyDetailsForm(request.POST, use_required_attribute=False)
-        if form.is_valid():
-            customer_details_form = request.session['customer_details_form']
-            enquiry = form.save(commit=False)
-            enquiry.first_name = customer_details_form['first_name']
-            enquiry.last_name = customer_details_form['last_name']
-            enquiry.address_building = customer_details_form['address_building']
-            enquiry.address_street = customer_details_form['address_street']
-            enquiry.address_town = customer_details_form['address_town']
-            enquiry.address_county = customer_details_form['address_county']
-            enquiry.address_postcode = customer_details_form['address_postcode']
-            enquiry.telephone_number = customer_details_form['telephone_number']
-            enquiry.email = customer_details_form['email']
-            enquiry.preferred_time_to_call = customer_details_form['preferred_time_to_call']
-
-            print(enquiry)
-
-            enquiry.save()
-
-            # new_enquiry = Enquiry(customer_details_form)
-            # print(new_enquiry)
-            # new_enquiry = Enquiry(property_details_form)
-            # print(new_enquiry)
-
-            return redirect("/")
-    else:
-        form = PropertyDetailsForm(use_required_attribute=False)
-
-    return render(request, "property_details.html", {"form": form})
