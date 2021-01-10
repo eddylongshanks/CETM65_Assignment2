@@ -49,18 +49,18 @@ def property_details(request):
             enquiry_data = EnquiryProvider()
             enquiry_data.add(property_details_data)
             enquiry_data.add(customer_details_data)
-            enquiry = enquiry_data.get_list()
+            completed_data = enquiry_data.get_list()
 
-            customer = CustomerForm(enquiry)
+            enquiry = CustomerForm(completed_data)
 
             # Perform final validation, redirect to start if there is invalid data
-            if not customer.is_valid():
+            if not enquiry.is_valid():
                 return redirect("customer_details")
 
-            customer.save()
+            enquiry.save()
 
             # Send a confirmation email to the customer only after saving the enquiry
-            mailer = EmailSender(enquiry_data.get_email())
+            mailer = EmailSender(enquiry_data.get_list())
             mailer.send()
 
             return redirect("thank_you")
@@ -84,9 +84,15 @@ def thank_you(request):
 # to remove
 
 def emailtest(request):
-    mailer = EmailSender("chris@holmescentral.co.uk")
 
-    #mailer.send()
+    customer_details_data = {
+                'first_name': 'Katie',
+                'email': 'chris@holmescentral.co.uk',
+                'preferred_time_to_contact': 'S',
+            }
+    mailer = EmailSender(customer_details_data)
+
+    mailer.send()
     return HttpResponse(mailer)
 
 # def testroute(request):

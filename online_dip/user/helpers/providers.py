@@ -19,13 +19,6 @@ class EnquiryProvider:
 
         return self.data
 
-    # Smell[2]: needs testing
-    def get_email(self):
-        """ Return the email address """
-
-        email = self.data.get("email")
-        return email
-
     def __str__(self):
         return str(self.data)
 

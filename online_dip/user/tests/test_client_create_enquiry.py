@@ -43,7 +43,7 @@ class TestClientCreateEnquiry(TestCase):
                 'address_postcode': 'test_postcode',
                 'telephone_number': '0123',
                 'email': 'me@me.com',
-                'preferred_time_to_call': 'S'
+                'preferred_time_to_contact': 'S'
             }
         session = self.client.session
         session['customer_details'] = customer_details_data
@@ -86,7 +86,7 @@ class TestClientCreateEnquiry(TestCase):
                 'address_postcode': 'test_postcode',
                 'telephone_number': '0123',
                 'email': 'me@me.com',
-                'preferred_time_to_call': 'S'
+                'preferred_time_to_contact': 'S'
             }
         property_details_data = {
                 'annual_income': '300',
