@@ -4,14 +4,8 @@ form classes for the enquiry creator
 
 from django import forms
 from .models import Customer
-from django.utils.translation import gettext_lazy as _
+# from django.utils.translation import gettext_lazy as _
 
-
-# class AddressForm(forms.ModelForm):
-
-#     class Meta:
-#         model = Address
-#         fields = ['building', 'street', 'town', 'county', 'postcode']
 
 class CustomerDetailsForm(forms.ModelForm):
     """

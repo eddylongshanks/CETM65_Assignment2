@@ -7,6 +7,8 @@ from django.utils import timezone
 
 
 class Address(models.Model):
+    """ Address Model """
+
     address_id = models.AutoField(primary_key=True)
     building = models.CharField(max_length=50, blank=True, verbose_name="Building and Street")
     street = models.CharField(max_length=50, blank=True, verbose_name="Street")
@@ -22,6 +24,8 @@ class Address(models.Model):
 
 
 class PersonalDetails(Address):
+    """ Personal Details Model, holding customer information from page 1 """
+
     personal_details_id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=40, verbose_name="First Name")
     last_name = models.CharField(max_length=40, verbose_name="Last Name")
@@ -56,6 +60,8 @@ class PersonalDetails(Address):
 
 
 class PropertyDetails(models.Model):
+    """ Property Details Model, holding information from page 2 """
+
     property_details_id = models.AutoField(primary_key=True)
     annual_income = models.IntegerField(verbose_name="Annual Income")
     loan_amount = models.IntegerField(verbose_name="Loan Amount")
@@ -82,6 +88,8 @@ class PropertyDetails(models.Model):
 
 
 class Customer(PersonalDetails, PropertyDetails):
+    """ Full Customer Model, consolidate all information and add extra non-user fields """
+
     date_created = models.DateField(default=timezone.now, verbose_name="Date Created")
     has_been_contacted = models.BooleanField(default=False, verbose_name="Has been Contacted?")
 

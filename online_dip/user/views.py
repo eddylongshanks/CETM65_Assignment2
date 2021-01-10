@@ -3,7 +3,7 @@ The main view file, handles all get and post requests to create an Enquiry.
 """
 
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from .forms import CustomerDetailsForm, PropertyDetailsForm, CustomerForm
 from .helpers.providers import EnquiryProvider
 
@@ -69,6 +69,7 @@ def property_details(request):
 
 
 def thank_you(request):
+    """ Page displayed on submission complete """
 
     # Clean the session
     request.session["customer_details"] = {}
@@ -77,47 +78,47 @@ def thank_you(request):
 
 # to remove
 
-def testroute(request):
-    """
-    Test form
-    """
+# def testroute(request):
+#     """
+#     Test form
+#     """
 
-    cust = {
-        "first_name": "steve",
-        "last_name": "smith",
-        "telephone_number": "123",
-        "preferred_time_to_contact": "S",
-    }
-    prop = {
-        "annual_income": "2",
-        "loan_amount": "3",
-        "property_value": "4",
-        "mortgage_type": "RM",
-    }
+#     cust = {
+#         "first_name": "steve",
+#         "last_name": "smith",
+#         "telephone_number": "123",
+#         "preferred_time_to_contact": "S",
+#     }
+#     prop = {
+#         "annual_income": "2",
+#         "loan_amount": "3",
+#         "property_value": "4",
+#         "mortgage_type": "RM",
+#     }
 
-    custfull = {
-        "first_name": "steve",
-        "last_name": "smith",
-        "telephone_number": "123",
-        "preferred_time_to_contact": "S",
-        "annual_income": "2",
-        "loan_amount": "3",
-        "property_value": "4",
-        "mortgage_type": "RM",
-    }
+#     custfull = {
+#         "first_name": "steve",
+#         "last_name": "smith",
+#         "telephone_number": "123",
+#         "preferred_time_to_contact": "S",
+#         "annual_income": "2",
+#         "loan_amount": "3",
+#         "property_value": "4",
+#         "mortgage_type": "RM",
+#     }
 
 
-    cust_form = CustomerDetailsForm(cust).save(commit=False)
-    prop_form = PropertyDetailsForm(prop).save(commit=False)
+#     cust_form = CustomerDetailsForm(cust).save(commit=False)
+#     prop_form = PropertyDetailsForm(prop).save(commit=False)
 
-    customer_data = EnquiryProvider()
-    customer_data.add(cust)
-    customer_data.add(prop)
-    print(customer_data)
+#     customer_data = EnquiryProvider()
+#     customer_data.add(cust)
+#     customer_data.add(prop)
+#     print(customer_data)
 
-    # enq = CustomerForm(custfull).save(commit=False)
-    # cust = Customer.objects.create(**cust, **prop)
-    # cust.save()
-    # print(cust)
+#     # enq = CustomerForm(custfull).save(commit=False)
+#     # cust = Customer.objects.create(**cust, **prop)
+#     # cust.save()
+#     # print(cust)
 
-    return HttpResponse(customer_data)
+#     return HttpResponse(customer_data)
