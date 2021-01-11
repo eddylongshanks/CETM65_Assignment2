@@ -1,0 +1,19 @@
+name: Code-Coverage
+
+on: push
+ 
+jobs:  
+  super-lint:
+    # Name the Job
+    name: Code Coverage
+    # Set the type of machine to run on
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout action
+      uses: actions/checkout@v2
+    - name: Django Coverage action
+      uses: actions/python-django-coverage-gitHub-action@0.9
+      with:
+        django-app: 'user'
+        minimum-coverage: '80'

@@ -64,7 +64,7 @@ class TestEnquiryProvider(TestCase):
 
         self.assertDictEqual(expected_dictionary, actual_dictionary)
 
-    def test_add_non_dict_object_should_raise_ValueError_exception(self):
+    def test_add_non_dict_object_should_raise_value_error_exception(self):
         """
         Attempting to add any non-dictionary object to the list
         should raise TypeError exception
@@ -105,6 +105,3 @@ class TestEnquiryProvider(TestCase):
 
         # print(self.provider)
         self.assertEqual(expected_string, actual_string)
-
-if __name__ == "__main__":
-    unittest.main()
