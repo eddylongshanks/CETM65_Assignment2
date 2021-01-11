@@ -53,10 +53,13 @@
         border: 3px solid #d4351c;
     }
 
-    input:focus,
     button:focus,
     a.button:focus,
     .error-summary:focus {
+        box-shadow: 0 0 1px 4px #c08d01;        
+    }
+
+    input:focus {
         box-shadow: 0 0 1px 4px #c08d01;
         background-color: rgb(41, 41, 41);
     }
@@ -125,18 +128,19 @@
         background-image: url(../images/error_48px.svg);       
     }
 
-        .responsive-table .table-header {
-            background-color: #bedba3;            
-        }
-        .responsive-table .table-row {
-            background-color: #ffffff;            
-        }
+    .responsive-table .table-header {
+        background-color: #373b33;
+        color: #fff;
+    }
+    .responsive-table .table-row {
+        background-color: rgb(36, 36, 36);
+    }
 
-        @media all and (max-width: 767px) {
-            .responsive-table .col:before {
-                color: #6C7A89;                
-            }
+    @media all and (max-width: 767px) {
+        .responsive-table .col:before {
+            color: #6C7A89;                
         }
+    }
 
 
     footer {
