@@ -2,7 +2,6 @@
 
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from django.conf import settings
 
 class EmailSender():
     """ Handles the sending of email """
@@ -17,10 +16,10 @@ class EmailSender():
         """ Sends the email """
 
         send_mail(
-            self.subject,
-            self.message,
-            settings.EMAIL_FROM,
-            [self.address],
+            subject=self.subject,
+            message=self.message,
+            from_email=None,
+            recipient_list=[self.address],
             html_message=self.html_message,
             fail_silently=False,
         )

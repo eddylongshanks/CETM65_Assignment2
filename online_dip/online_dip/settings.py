@@ -127,7 +127,7 @@ STATIC_URL = '/static/'
 
 # Emailer Settings
 
-EMAIL_FROM = os.environ.get('DJANGO_EMAIL_FROM')
+DEFAULT_FROM_EMAIL = os.environ.get('DJANGO_DEFAULT_FROM_EMAIL')
 EMAIL_HOST = os.environ.get('DJANGO_EMAIL_HOST')
 EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_EMAIL_HOST_PASSWORD')
 EMAIL_HOST_USER = os.environ.get('DJANGO_EMAIL_HOST_USER')
