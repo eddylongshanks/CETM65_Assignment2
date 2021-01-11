@@ -4,7 +4,9 @@ The main view file, handles all get and post requests to create an Enquiry.
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from .forms import CustomerDetailsForm, PropertyDetailsForm, CustomerForm
+from .models import Customer
 from .helpers.providers import EnquiryProvider
 from .helpers.mailer import EmailSender
 
@@ -81,7 +83,25 @@ def thank_you(request):
 
     return render(request, "thank_you.html")
 
+@login_required
+def adviser(request):
+    customers =  Customer.objects.all()
+
+    context = {
+        "customers": customers
+    }
+    return render(request, "adviser/enquiry_list.html", context)
+
 # to remove
+
+def advisertest(request):
+    customers =  Customer.objects.all()
+
+    context = {
+        "customers": customers
+    }
+    return render(request, "adviser/enquiry_list.html", context)
+
 
 def emailtest(request):
 
