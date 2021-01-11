@@ -6,6 +6,7 @@
 
 /* Global Styles */
 
+
 *, *:focus, *:hover {
     outline: none;
     box-sizing: border-box;
@@ -63,8 +64,14 @@ header {
     flex: 1 0 auto;
 }
 
-.logo {
-    width: 250px;
+.logo-box {
+    background-image: url(../images/NewcastleBuildingSocietyLogo.svg); /* The image used */
+    width: 800px; 
+    height: 100px;
+    display:inline-block;
+    background-position: left; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: auto; /* Resize the background image to cover the entire container */
 }
 
 fieldset {
@@ -499,7 +506,7 @@ footer {
         line-height: 1.25em;
     }
 
-    .logo {
+    .logo-box {
         width: 200px;
         display: block;
         margin-left: auto;
