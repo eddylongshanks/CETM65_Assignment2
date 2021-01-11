@@ -5,6 +5,7 @@ The main view file, handles all get and post requests to create an Enquiry.
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
 from .forms import CustomerDetailsForm, PropertyDetailsForm, CustomerForm
 from .models import Customer
 from .helpers.providers import EnquiryProvider
@@ -91,6 +92,25 @@ def adviser(request):
         "customers": customers
     }
     return render(request, "adviser/enquiry_list.html", context)
+
+
+class CustomerListView(ListView):
+    model = Customer
+    template_name = "adviser/enquiry_list.html"
+    context_object_name = "customers"
+    ordering = ["date_created"]
+
+    def get_queryset(self):
+        filter_val = self.request.GET.get('has_been_contacted', 'False')
+        new_context = Customer.objects.filter(
+            has_been_contacted=filter_val,
+        )
+        return new_context
+
+    def get_context_data(self, **kwargs):
+        context = super(CustomerListView, self).get_context_data(**kwargs)
+        context['has_been_contacted'] = self.request.GET.get('has_been_contacted', 'True')
+        return context
 
 # to remove
 

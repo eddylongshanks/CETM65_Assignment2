@@ -3,6 +3,7 @@ url mapping for the enquiry creator
 """
 
 from django.urls import path
+from .views import CustomerListView
 from . import views
 
 urlpatterns = [
@@ -16,5 +17,7 @@ urlpatterns = [
     path('property_details/', views.property_details, name='property_details'),
     path('thank_you/', views.thank_you, name='thank_you'),
 
-    path('adviser/', views.adviser, name='adviser-home'),
+    # path('adviser/', views.adviser, name='adviser-home'),
+    path('adviser/', CustomerListView.as_view() , name='adviser-home'),
+
 ]
