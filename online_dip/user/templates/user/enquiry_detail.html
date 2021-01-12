@@ -1,0 +1,59 @@
+{% extends "_layout.html" %}
+
+{% block title %}Enquiry Details{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Enquiry Details</h1>
+        
+        <div class="field">
+            {{ object.first_name }} {{ object.last_name }}
+        </div> 
+
+        <div class="field">
+            {{ object.telephone_number }}
+        </div> 
+
+
+        <!-- <h3>What is your Address?</h3>
+
+        <div class="field">
+            <label class="field-label">{{ form.building.label }}</label>
+            {{ form.building }}
+        </div>
+        <div class="field">
+            {{ form.street }}
+        </div>
+        <div class="field">
+            <label class="field-label">{{ form.town.label }}</label>
+            {{ form.town }}
+        </div>
+        <div class="field">
+            <label class="field-label">{{ form.county.label }}</label>
+            {{ form.county }}
+        </div>
+        <div class="field">
+            <label class="field-label">{{ form.postcode.label }}</label>
+            {{ form.postcode }}
+        </div>
+        <div class="field">
+            <label class="field-label">{{ form.telephone_number.label }}</label>
+            {{ form.telephone_number }}
+        </div>
+        <div class="field">
+            <label class="field-label">{{ form.email.label }}</label>
+            <div class="field-hint">The data collected here will only be used to fulfill this request.</div>
+            {{ form.email }}
+        </div>
+
+        <label class="field-label">{{ form.preferred_time_to_contact.label }}</label>
+             -->
+
+        <div class="field">
+            <button type="submit" id="submit">Submit</button>
+            <a href="{% url 'adviser-home' %}" class="button button-secondary">Cancel</a>
+        </div>
+</div>
+
+{% endblock %}

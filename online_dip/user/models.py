@@ -87,8 +87,8 @@ class PropertyDetails(models.Model):
         return obj_str
 
 
-class Customer(PersonalDetails, PropertyDetails):
-    """ Full Customer Model, consolidate all information and add extra non-user fields """
+class Enquiry(PersonalDetails, PropertyDetails):
+    """ Full Enquiry Model, consolidate all information and add extra non-user fields """
 
     date_created = models.DateField(default=timezone.now, verbose_name="Date Created")
     has_been_contacted = models.BooleanField(default=False, verbose_name="Has been Contacted?")

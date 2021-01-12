@@ -31,7 +31,7 @@
     button,
     a.button {        
         background:  #5f7380;
-        color: #000;        
+        color: #000;
     }
 
         button:hover,
@@ -42,11 +42,21 @@
         button.button-danger,
         a.button-danger {
             background: rgb(182, 27, 0);
-            /* border: 1px solid rgb(97, 14, 14); */
+            color: #fff;
+
         }
             button.button-danger:hover,
             a.button-danger:hover {
                 background: rgb(153, 29, 7);
+            }
+        
+        button.button-secondary,
+        a.button-secondary {
+            background: rgb(54, 54, 54);
+        }
+            button.button-secondary:hover,
+            a.button-secondary:hover {
+                background: rgb(77, 77, 77);
             }
 
     .input-validation-error {
@@ -67,14 +77,6 @@
     a {
         color: #1d70b8;
     }
-
-        a:visited {
-            color: #1d70b8;
-        }
-
-        a.button:visited {
-            color: #fff;
-        }
     
     .logo-box {
         background-image: url(../images/NewcastleBuildingSocietyLogo-white.svg); 
@@ -132,7 +134,7 @@
         background-color: #373b33;
         color: #fff;
     }
-    
+
     .responsive-table .table-row {
         background-color: rgb(36, 36, 36);
     }

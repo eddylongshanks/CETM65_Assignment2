@@ -3,8 +3,8 @@ admin file for the enquiry creator
 """
 
 from django.contrib import admin
-from user.models import Customer
+from user.models import Enquiry
 
 # Register your models here.
 
-admin.site.register(Customer)
+admin.site.register(Enquiry)

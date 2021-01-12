@@ -5,9 +5,9 @@ The main view file, handles all get and post requests to create an Enquiry.
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from .forms import CustomerDetailsForm, PropertyDetailsForm, CustomerForm
-from .models import Customer
+from .models import Enquiry
 from .helpers.providers import EnquiryProvider
 from .helpers.mailer import EmailSender
 
@@ -84,38 +84,32 @@ def thank_you(request):
 
     return render(request, "thank_you.html")
 
-@login_required
-def adviser(request):
-    customers =  Customer.objects.all()
+# @login_required
+# def adviser(request):
+#     customers =  Customer.objects.all()
 
-    context = {
-        "customers": customers
-    }
-    return render(request, "adviser/enquiry_list.html", context)
+#     context = {
+#         "customers": customers
+#     }
+#     return render(request, "adviser/enquiry_list.html", context)
 
-
-class CustomerListView(ListView):
-    model = Customer
+class EnquiryListView(ListView):
+    model = Enquiry
     template_name = "adviser/enquiry_list.html"
     context_object_name = "customers"
-    ordering = ["date_created"]
 
-    def get_queryset(self):
-        filter_val = self.request.GET.get('has_been_contacted', 'False')
-        new_context = Customer.objects.filter(
-            has_been_contacted=filter_val,
-        )
-        return new_context
+    # Only return customers who have not yet been contacted
+    queryset = Enquiry.objects.filter(has_been_contacted="False")
 
-    def get_context_data(self, **kwargs):
-        context = super(CustomerListView, self).get_context_data(**kwargs)
-        context['has_been_contacted'] = self.request.GET.get('has_been_contacted', 'True')
-        return context
+
+class EnquiryDetailView(DetailView):
+    model = Enquiry
+
 
 # to remove
 
 def advisertest(request):
-    customers =  Customer.objects.all()
+    customers =  Enquiry.objects.all()
 
     context = {
         "customers": customers
