@@ -4,6 +4,7 @@ models file for the enquiry creator
 
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 
 class Address(models.Model):
@@ -52,11 +53,7 @@ class PersonalDetails(Address):
     # Add preferred time to be contacted?
 
     def __str__(self):
-        obj_str = f'Tel: {self.telephone_number}, ' \
-                  f'First Name: {self.first_name}, ' \
-                  f'Last Name: {self.last_name}, ' \
-
-        return obj_str
+        return f'{self.first_name} {self.last_name} - Tel: {self.telephone_number}'
 
 
 class PropertyDetails(models.Model):
@@ -81,20 +78,18 @@ class PropertyDetails(models.Model):
     )
 
     def __str__(self):
-        obj_str = f'Loan Amount: {self.loan_amount}, ' \
-                  f'Property Value: {self.property_value}, ' \
-
-        return obj_str
+        return f'Loan Amount: {self.loan_amount}, Property Value: {self.property_value}'
 
 
-class Customer(PersonalDetails, PropertyDetails):
-    """ Full Customer Model, consolidate all information and add extra non-user fields """
+class Enquiry(PersonalDetails, PropertyDetails):
+    """ Full Enquiry Model, consolidate all information and add extra non-user fields """
 
     date_created = models.DateField(default=timezone.now, verbose_name="Date Created")
     has_been_contacted = models.BooleanField(default=False, verbose_name="Has been Contacted?")
 
     def __str__(self):
-        obj_str = f'{self.first_name} {self.last_name} - ' \
-                  f'Tel: {self.telephone_number}, ' \
+        return f'{self.first_name} {self.last_name} - Tel: {self.telephone_number}'
+    
+    def get_absolute_url(self):
+        return reverse("adviser-list")
 
-        return obj_str

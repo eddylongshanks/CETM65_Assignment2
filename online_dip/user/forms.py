@@ -3,7 +3,7 @@ form classes for the enquiry creator
 """
 
 from django import forms
-from .models import Customer
+from .models import Enquiry
 # from django.utils.translation import gettext_lazy as _
 
 
@@ -13,7 +13,7 @@ class CustomerDetailsForm(forms.ModelForm):
     """
 
     class Meta:
-        model = Customer
+        model = Enquiry
         fields = ['first_name', 'last_name', 'building', 'street', 'town', 'county', 'postcode', 'telephone_number', 'email', 'preferred_time_to_contact']
         widgets = {
             'preferred_time_to_contact': forms.RadioSelect(),
@@ -32,7 +32,7 @@ class PropertyDetailsForm(forms.ModelForm):
     """
 
     class Meta:
-        model = Customer
+        model = Enquiry
         fields = ['annual_income', 'loan_amount', 'property_value', 'mortgage_type']
         widgets = {
             'mortgage_type': forms.RadioSelect(),
@@ -44,13 +44,13 @@ class PropertyDetailsForm(forms.ModelForm):
         for field in self.fields.values():
             field.error_messages = {'required' : f'{field.label} is required'}
 
-
+# SMELL rename to Enquiry?
 class CustomerForm(forms.ModelForm):
     """
     Final full enquiry model
     """
 
     class Meta:
-        model = Customer
+        model = Enquiry
         fields = ['first_name', 'last_name', 'building', 'street', 'town', 'county', 'postcode', 'telephone_number', 'email', 'preferred_time_to_contact',
                   'annual_income', 'loan_amount', 'property_value', 'mortgage_type' ]

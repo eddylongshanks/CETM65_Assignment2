@@ -122,8 +122,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# LOGIN_REDIRECT_URL = 'adviser-home'
-# LOGIN_URL = 'adviser-login'
+LOGIN_REDIRECT_URL = 'adviser-list'
+LOGIN_URL = 'login'
 
 # Emailer Settings
 

@@ -1,0 +1,195 @@
+﻿@media (prefers-color-scheme: dark) {
+    
+    .skip-to-content a:focus {
+        color: #fff;            
+    }
+
+    body {
+        background-color: rgb(31, 31, 31);
+        color: rgb(170, 183, 192);
+    }
+
+    input {        
+        background: #333;
+        border: 2px solid #555;
+        color: #fff;
+    }
+
+    h1 {
+        color: rgb(69, 162, 224);    
+    }
+
+    hr {        
+        border-top: 1px dashed #555;
+        color: #333;        
+    }
+
+    h3 {        
+        color:  rgb(69, 162, 224);
+    }
+
+    h4 {        
+        color:  rgb(126, 183, 223);
+    }
+
+    button,
+    a.button {        
+        background:  #5f7380;
+        color: #000;
+    }
+
+        button:hover,
+        a.button:hover {
+            background: #96afbe;
+        }
+
+        button.button-danger,
+        a.button-danger {
+            background: rgb(182, 27, 0);
+            color: #fff;
+
+        }
+            button.button-danger:hover,
+            a.button-danger:hover {
+                background: rgb(153, 29, 7);
+            }
+        
+        button.button-secondary,
+        a.button-secondary {
+            background: rgb(54, 54, 54);
+        }
+            button.button-secondary:hover,
+            a.button-secondary:hover {
+                background: rgb(77, 77, 77);
+            }
+
+    .input-validation-error {
+        border: 3px solid #d4351c;
+    }
+
+    button:focus,
+    a.button:focus,
+    .error-summary:focus {
+        box-shadow: 0 0 1px 4px #c08d01;        
+    }
+
+    input:focus {
+        box-shadow: 0 0 1px 4px #c08d01;
+        background-color: rgb(41, 41, 41);
+    }
+
+    a {
+        color: #1d70b8;
+    }
+    
+    .logo-box {
+        background-image: url(../images/NewcastleBuildingSocietyLogo-white.svg); 
+        width: 800px; 
+        height: 100px;
+        display:inline-block;
+        background-position: left; 
+        background-repeat: no-repeat; 
+        background-size: auto; 
+    }
+
+    /* Radio Button */
+
+    .field-radio-button label:before {        
+        border: 2px solid #555;        
+    }
+
+        .field-radio-button input:checked ~ label:after {            
+            border: 5px solid #555;            
+            background: #333;
+        }
+
+        .field-radio-button input:focus ~ label:before {            
+            box-shadow: 0 0 0 2px #c08d01;
+        }
+    
+    /* Check box */
+
+    .field-check-box label:before {            
+        border: 2px solid #fff;            
+    }
+
+        .field-check-box input:checked ~ label:after {
+            border: solid #fff;            
+            border-width: 0 0 3px 3px;
+        }
+
+        .field-check-box input:focus ~ label:before {
+            box-shadow: 0 0 0 2px #c08d01;
+        }
+
+    .field-prefix-group div:first-child {        
+        border: 2px solid #555;        
+        background-color: #333;
+    }
+
+    .field-hint {        
+        color: #555;
+    }
+
+    /* Error Styling */
+    .error-summary {
+        background: rgb(31, 31, 31);
+        border: 4px solid #d4351c;
+        color: #d4351c;
+    }
+
+    .error-summary h2 {
+        color: rgb(180, 180, 180);
+    }
+
+    .error-summary a {
+        color: #d4351c;
+    }
+
+    .field-error {
+        color: #d4351c;        
+        background-image: url(../images/error_48px.svg);       
+    }
+
+    /* Table */
+
+    .responsive-table .table-header {
+        background-color: #33363b;
+        color: #fff;
+    }
+
+        .responsive-table .table-row {
+            background-color: rgb(36, 36, 36);
+        }
+
+        @media all and (max-width: 767px) {
+            .responsive-table .col:before {
+                color: #6C7A89;                
+            }
+        }
+
+    .flex-item {
+        background: rgb(36, 36, 36);            
+        border: 1px solid #555;
+    }        
+
+    footer {
+        background:rgb(37, 37, 37);
+        color: rgb(180, 180, 180);
+    }
+
+        footer a,
+        footer a:visited {
+            color: #fff;
+        }    
+    
+    @media only screen and (max-width: 480px) {
+        
+        .logo-box {
+            width: 200px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}

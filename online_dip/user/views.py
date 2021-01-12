@@ -4,7 +4,10 @@ The main view file, handles all get and post requests to create an Enquiry.
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, UpdateView
 from .forms import CustomerDetailsForm, PropertyDetailsForm, CustomerForm
+from .models import Enquiry
 from .helpers.providers import EnquiryProvider
 from .helpers.mailer import EmailSender
 
@@ -81,7 +84,40 @@ def thank_you(request):
 
     return render(request, "thank_you.html")
 
+# @login_required
+# def adviser(request):
+#     customers =  Customer.objects.all()
+
+#     context = {
+#         "customers": customers
+#     }
+#     return render(request, "adviser/enquiry_list.html", context)
+
+class EnquiryListView(LoginRequiredMixin, ListView):
+    model = Enquiry
+    template_name = "adviser/enquiry_list.html"
+    context_object_name = "customers"
+
+    # Only return customers who have not yet been contacted
+    queryset = Enquiry.objects.filter(has_been_contacted="False")
+
+
+class EnquiryUpdateView(LoginRequiredMixin, UpdateView):
+    model = Enquiry
+    fields = [ 'has_been_contacted' ]
+
+
+
 # to remove
+
+def advisertest(request):
+    customers =  Enquiry.objects.all()
+
+    context = {
+        "customers": customers
+    }
+    return render(request, "adviser/enquiry_list.html", context)
+
 
 def emailtest(request):
 
