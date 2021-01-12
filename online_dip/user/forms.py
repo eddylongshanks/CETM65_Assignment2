@@ -44,7 +44,7 @@ class PropertyDetailsForm(forms.ModelForm):
         for field in self.fields.values():
             field.error_messages = {'required' : f'{field.label} is required'}
 
-
+# SMELL rename to Enquiry?
 class CustomerForm(forms.ModelForm):
     """
     Final full enquiry model

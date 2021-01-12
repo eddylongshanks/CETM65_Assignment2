@@ -115,6 +115,19 @@ h1 {
     color: #005488;    
 }
 
+h3 {
+    margin: 0 0 20px 0;
+    font-size: 1.38em;
+    color: #005488;
+}
+
+h4 {
+    margin: 10px 0;
+    padding-left: 8px;
+    font-size: 1em;
+    color: #005488;
+}
+
 hr {
     overflow: visible; /* For IE */
     padding-bottom: 10px;
@@ -122,12 +135,6 @@ hr {
     border-top: 1px dashed #333;
     color: #333;
     text-align: center;
-}
-
-h3 {
-    margin: 0 0 20px 0;
-    font-size: 1.38em;
-    color: #005488;
 }
 
 button,
@@ -169,6 +176,14 @@ a.button {
         a.button-secondary:hover {
             background: rgb(163, 163, 163);
         }
+    
+    button.button-small,
+    a.button-small {
+        padding: 5px 15px;
+        margin: 5px 5px 5px 0;
+        font-size: 14px;
+        font-weight: bolder;
+    }
 
 .input-validation-error {
     border: 3px solid #d4351c;
@@ -190,57 +205,114 @@ a {
     margin-bottom: 30px;
 }
 
-.field-radio-button {
-    margin-left: 10px;
-    width: auto;
-    position: relative;    
-}
-
-    .field-radio-button input {
-        opacity: 0;
+    .field-radio-button {
         margin-left: 10px;
         width: auto;
+        position: relative;    
+    }
+
+        .field-radio-button input {
+            opacity: 0;
+            margin-left: 10px;
+            width: auto;
+            position: relative;
+        }
+
+        .field-radio-button label {
+            display: inline-block;
+            padding-left: 10px;
+            cursor: pointer;
+            margin-bottom: .5rem;
+        }
+
+        .field-radio-button label:before {
+            content: "";
+            box-sizing: border-box;
+            position: absolute;
+            top: 4px;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border: 2px solid black;
+            border-radius: 50%;
+            background: transparent;
+        }
+
+        .field-radio-button input:checked ~ label:after {
+            content: "";
+            position: absolute;
+            top: 9px;
+            left: 5px;
+            width: 0;
+            height: 0;
+            border: 5px solid black;
+            border-radius: 50%;
+            opacity: 1;
+            background: black;
+        }
+
+        .field-radio-button input:focus ~ label:before {
+            outline: 3px solid transparent;
+            outline-offset: 3px;
+            box-shadow: 0 0 0 2px #ffbf47;
+        }
+
+    /* Check box */
+
+    .field-check-box {
         position: relative;
+        padding: 6px 0;
+        margin: 30px 20px;
     }
+    
+        .field-check-box input {
+            opacity: 0;
+            width: initial;
+        }
 
-    .field-radio-button label {
-        display: inline-block;
-        padding-left: 10px;
-        cursor: pointer;
-        margin-bottom: .5rem;
-    }
+        .field-check-box label {
+            display: inline-block;
+            padding-left: 1.2rem;
+            max-width: 90%;
+            cursor: pointer;
+            margin-top: 3px;
+        }
 
-.field-radio-button label:before {
-    content: "";
-    box-sizing: border-box;
-    position: absolute;
-    top: 4px;
-    left: 0;
-    width: 20px;
-    height: 20px;
-    border: 2px solid black;
-    border-radius: 50%;
-    background: transparent;
-}
+        .field-check-box .field-hint {
+            margin-top: 5px;
+        }
 
-    .field-radio-button input:checked ~ label:after {
-        content: "";
-        position: absolute;
-        top: 9px;
-        left: 5px;
-        width: 0;
-        height: 0;
-        border: 5px solid black;
-        border-radius: 50%;
-        opacity: 1;
-        background: black;
-    }
+        .field-check-box label:before {
+            content: "";
+            box-sizing: border-box;
+            position: absolute;
+            left: 4px;
+            width: 24px;
+            height: 24px;
+            border: 2px solid black;
+            background: transparent;
+        }
 
-    .field-radio-button input:focus ~ label:before {
-        outline: 3px solid transparent;
-        outline-offset: 3px;
-        box-shadow: 0 0 0 2px #ffbf47;
-    }
+        .field-check-box input:checked ~ label:after {
+            content: "";
+            position: absolute;
+            top: 16px;
+            left: 8px;
+            width: 14px;
+            height: 4px;
+            border: solid black;
+            border-width: 0 0 3px 3px;
+            opacity: 1;
+            transform: rotate(-50deg);
+        }
+
+        .field-check-box input:focus ~ label:before {
+            outline: 3px solid transparent;
+            outline-offset: 3px;
+            box-shadow: 0 0 0 4px #ffbf47;
+        }
+
+
 
 .field-label {
     display: block;
@@ -343,8 +415,6 @@ a {
 
 /* Adviser */
 
-
-
 .adviser-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -361,32 +431,42 @@ a {
    
 .responsive-table li {
     border-radius: 3px;
-    padding: 20px 30px;
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
 }    
     .responsive-table .table-header {
-        background-color: #bedba3;
-        font-size: 14px;
+        background-color: #7c93be;
+        padding: 20px 20px;
+        font-size: 16px;
         text-transform: uppercase;
         letter-spacing: 0.03em;
+        color: #fff;
     }
     .responsive-table .table-row {
-        background-color: #ffffff;
+        background-color: #dce4ec;
         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
     }
     .responsive-table .col-1 {
-        flex-basis: 40%;
+        flex-basis: 30%;
     }
     .responsive-table .col-2 {
-        flex-basis: 40%;
+        flex-basis: 30%;        
     }
     .responsive-table .col-3 {
-        flex-basis: 25%;
+        flex-basis: 18%;
+        text-align: right;
     }
     .responsive-table .col-4 {
-        flex-basis: 25%;
+        flex-basis: 18%;
+        text-align: right;
+    }
+    .responsive-table .col-5 {
+        flex-basis: 15%;
+        text-align: right;
     }
 
     @media all and (max-width: 767px) {
@@ -412,28 +492,23 @@ a {
         }
     }
 
-
-/* 
-.enquiry-table {
-    background-color: #d5eccc;
-    border: 1px solid black;
-    border-collapse: collapse;
-    margin: 10px;
+.update-flex-container {
+    display: flex;    
+    flex-flow: column;    
+    justify-content: left;
 }
-    .enquiry-table th, tr {
-        background-color: #9faf97;
-        text-align: left;
-        border-bottom: 1px solid black;
-        border-right: 1px solid grey;
-        padding: 10px;
+    .flex-item {
+        background: rgb(249, 252, 255);
+        border-radius: 5px;
+        border: 1px solid rgb(149, 185, 212);
+        padding: 25px 35px;
+        margin: 20px;
+        width: auto;
     }
-        .enquiry-table tr {
-            background-color: #c4dabc;
-            margin: 0;
+        .flex-item div {        
+            padding-left: 14px;
+            margin: 6px;
         }
-            .enquiry-table tr:nth-child(even) {
-                background-color: #def5d4;    
-            } */
 
 
 /* Footer */

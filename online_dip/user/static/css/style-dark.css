@@ -6,7 +6,7 @@
 
     body {
         background-color: rgb(31, 31, 31);
-        color: rgb(123, 184, 224);
+        color: rgb(170, 183, 192);
     }
 
     input {        
@@ -20,12 +20,16 @@
     }
 
     hr {        
-        border-top: 1px dashed #333;
+        border-top: 1px dashed #555;
         color: #333;        
     }
 
     h3 {        
         color:  rgb(69, 162, 224);
+    }
+
+    h4 {        
+        color:  rgb(126, 183, 223);
     }
 
     button,
@@ -88,6 +92,8 @@
         background-size: auto; 
     }
 
+    /* Radio Button */
+
     .field-radio-button label:before {        
         border: 2px solid #555;        
     }
@@ -98,6 +104,21 @@
         }
 
         .field-radio-button input:focus ~ label:before {            
+            box-shadow: 0 0 0 2px #c08d01;
+        }
+    
+    /* Check box */
+
+    .field-check-box label:before {            
+        border: 2px solid #fff;            
+    }
+
+        .field-check-box input:checked ~ label:after {
+            border: solid #fff;            
+            border-width: 0 0 3px 3px;
+        }
+
+        .field-check-box input:focus ~ label:before {
             box-shadow: 0 0 0 2px #c08d01;
         }
 
@@ -130,21 +151,27 @@
         background-image: url(../images/error_48px.svg);       
     }
 
+    /* Table */
+
     .responsive-table .table-header {
-        background-color: #373b33;
+        background-color: #33363b;
         color: #fff;
     }
 
-    .responsive-table .table-row {
-        background-color: rgb(36, 36, 36);
-    }
-
-    @media all and (max-width: 767px) {
-        .responsive-table .col:before {
-            color: #6C7A89;                
+        .responsive-table .table-row {
+            background-color: rgb(36, 36, 36);
         }
-    }
 
+        @media all and (max-width: 767px) {
+            .responsive-table .col:before {
+                color: #6C7A89;                
+            }
+        }
+
+    .flex-item {
+        background: rgb(36, 36, 36);            
+        border: 1px solid #555;
+    }        
 
     footer {
         background:rgb(37, 37, 37);

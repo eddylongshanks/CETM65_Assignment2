@@ -4,8 +4,8 @@ The main view file, handles all get and post requests to create an Enquiry.
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, UpdateView
 from .forms import CustomerDetailsForm, PropertyDetailsForm, CustomerForm
 from .models import Enquiry
 from .helpers.providers import EnquiryProvider
@@ -93,7 +93,7 @@ def thank_you(request):
 #     }
 #     return render(request, "adviser/enquiry_list.html", context)
 
-class EnquiryListView(ListView):
+class EnquiryListView(LoginRequiredMixin, ListView):
     model = Enquiry
     template_name = "adviser/enquiry_list.html"
     context_object_name = "customers"
@@ -102,8 +102,10 @@ class EnquiryListView(ListView):
     queryset = Enquiry.objects.filter(has_been_contacted="False")
 
 
-class EnquiryDetailView(DetailView):
+class EnquiryUpdateView(LoginRequiredMixin, UpdateView):
     model = Enquiry
+    fields = [ 'has_been_contacted' ]
+
 
 
 # to remove

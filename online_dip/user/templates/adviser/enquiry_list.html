@@ -14,13 +14,15 @@
             <div class="col col-2">Telephone Number</div>
             <div class="col col-3">Contacted?</div>
             <div class="col col-4">Date of Enquiry</div>
+            <div class="col col-5"></div>
         </li>
         {% for customer in customers %}
             <li class="table-row">
-                <div class="col col-1" data-label="Customer Name"><a href="{% url 'adviser-detail' customer.personaldetails_ptr_id %}">{{ customer.first_name }} {{ customer.last_name }}</a></div>
+                <div class="col col-1" data-label="Customer Name">{{ customer.first_name }} {{ customer.last_name }}</div>
                 <div class="col col-2" data-label="Telephone Number">{{ customer.telephone_number }}</div>
                 <div class="col col-3" data-label="Contacted?">{{ customer.has_been_contacted }}</div>
                 <div class="col col-4" data-label="Date of Enquiry">{{ customer.date_created }}</div>
+                <div class="col col-5" data-label=""><a class="button button-small" href="{% url 'adviser-update' customer.personaldetails_ptr_id %}">View Enquiry</a></div>
             </li>
         {% endfor %}
     </ul>
