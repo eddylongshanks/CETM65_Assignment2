@@ -65,13 +65,13 @@ header {
 }
 
 .logo-box {
-    background-image: url(../images/NewcastleBuildingSocietyLogo.svg); /* The image used */
+    background-image: url(../images/NewcastleBuildingSocietyLogo.svg);
     width: 800px; 
     height: 100px;
-    display:inline-block;
-    background-position: left; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: auto; /* Resize the background image to cover the entire container */
+    display: inline-block;
+    background-position: left; 
+    background-repeat: no-repeat;
+    background-size: auto;
 }
 
 fieldset {
@@ -122,7 +122,7 @@ h3 {
 }
 
 h4 {
-    margin: 10px 0;
+    margin: 15px 0;
     padding-left: 8px;
     font-size: 1em;
     color: #005488;
@@ -130,11 +130,11 @@ h4 {
 
 hr {
     overflow: visible; /* For IE */
-    padding-bottom: 10px;
+    margin: 10px 0;
     border: none;
     border-top: 1px dashed #333;
     color: #333;
-    text-align: center;
+    text-align: center;    
 }
 
 button,
@@ -162,6 +162,8 @@ a.button {
     a.button-danger {
         background: rgb(182, 27, 0);
         color: #fff;
+        padding: 10px 28px;
+        margin: 5px;
     }
         button.button-danger:hover,
         a.button-danger:hover {
@@ -422,73 +424,99 @@ a {
 
 .logout-align {
     padding-right: 20px;
+    margin-top: 30px;
+    display: block;    
     float: right;
 }
 
-.responsive-table {
+.enquiry-table {
     padding-left: 0;
+    margin: 30px 0;
 }
-   
-.responsive-table li {
+
+.enquiry-table a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.enquiry-table li {
     border-radius: 3px;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
 }    
-    .responsive-table .table-header {
+    .enquiry-table .table-header {
         background-color: #7c93be;
+        border: 1px solid rgb(79, 88, 95, 0.6);
+        box-shadow: 2px 2px 2px 0px rgba(9, 10, 10, 0.6);
         padding: 20px 20px;
         font-size: 16px;
         text-transform: uppercase;
         letter-spacing: 0.03em;
         color: #fff;
     }
-    .responsive-table .table-row {
+    .enquiry-table .table-row {
         background-color: #dce4ec;
-        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
-        display: flex;
+        border: 1px solid rgba(79, 88, 95, 0.4);
+        box-shadow: 2px 2px 2px 0px rgba(9, 10, 10, 0.4);
         align-items: center;
     }
-    .responsive-table .col-1 {
+        .enquiry-table .table-row:hover {
+            background-color: #c5d3e0;
+            border: 1px solid rgba(79, 88, 95, 0.6);
+            box-shadow: 2px 2px 2px 0px rgba(9, 10, 10, 0.8);
+            cursor: pointer;
+        }
+    .enquiry-table .col-1 {
         flex-basis: 30%;
     }
-    .responsive-table .col-2 {
+    .enquiry-table .col-2 {
         flex-basis: 30%;        
     }
-    .responsive-table .col-3 {
-        flex-basis: 18%;
+    .enquiry-table .col-3 {
+        flex-basis: 20%;
         text-align: right;
     }
-    .responsive-table .col-4 {
-        flex-basis: 18%;
+    .enquiry-table .col-4 {
+        flex-basis: 20%;
         text-align: right;
-    }
-    .responsive-table .col-5 {
-        flex-basis: 15%;
-        text-align: right;
-    }
+    }    
 
     @media all and (max-width: 767px) {
-        .responsive-table .table-header {
+        .enquiry-table {
+            margin: 0;
+            margin-top: 20px;
+        }
+        .enquiry-table .table-header {
             display: none;
         }
-        .responsive-table li {
-            display: block;
+        .enquiry-table .table-row {
+            width: 100%;
+            border: 1px solid rgb(79, 88, 95);
+            box-shadow: 2px 2px 2px 0px rgba(9, 10, 10, 0.6);
+            margin-bottom: 20px;
+            align-items: left;
         }
-        .responsive-table .col {
+        .enquiry-table li {
+            display: inline-block;
+        }
+        .enquiry-table .col {
             flex-basis: 100%;
-        }
-        .responsive-table .col {
             display: flex;
             padding: 10px 0;
-        }
-        .responsive-table .col:before {
+        }        
+        .enquiry-table .col-data:before {
             color: #6C7A89;
             padding-right: 10px;
-            content: attr(data-label);
+            content: attr(data-label)":";
             flex-basis: 50%;
-            text-align: right;
+            text-align: left;
+        }
+        button.button-small,
+        a.button-small {
+            width: 100%;            
+            text-align: center;
         }
     }
 
@@ -510,6 +538,9 @@ a {
             margin: 6px;
         }
 
+    .enquiry-buttons {
+        margin: 30px 20px;
+    }
 
 /* Footer */
 
@@ -568,7 +599,11 @@ footer {
     }
 
     #main-content {
-        padding: 20px;
+        padding: 10px 20px;
+    }
+
+    header {
+        padding: 20px 20px;
     }
 
     body {
@@ -577,11 +612,29 @@ footer {
 
     h1 {
         font-size: 1.875em;
+        text-align: center;
     }
 
     p {
         line-height: 1.25em;
     }
+
+    .update-flex-container {
+        display: flex;    
+        flex-flow: column;    
+        justify-content: left;
+        margin-bottom: 35px;
+    }
+
+        .flex-item {
+            padding: 10px 15px;
+            margin: 10px 5px;
+            width: auto;
+        }
+            .flex-item div {        
+                padding-left: 14px;
+                margin: 10px;
+            }
 
     .logo-box {
         width: 200px;
@@ -590,12 +643,35 @@ footer {
         margin-right: auto;
     }
 
-    button {
-        width: 100%;
+    button,
+    a.button {
+        text-align: center;
+        width: 100%;        
+    }
+
+    button.button-danger,
+    a.button-danger {
+        margin: 0;
+    }
+
+    .logout-align {
+        padding-right: 0;
+        margin-top: 30px;
+        margin: 30px 5px;
+        float: none;
     }
 
     .field-radio-button {
         padding: 3px 0;
+    }
+
+    .field-check-box {
+        padding: 6px 0;
+        margin: 30px 5px;
+    }
+
+    .enquiry-buttons {
+        margin: 30px 5px;
     }
 
     .success-img {

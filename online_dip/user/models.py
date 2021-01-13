@@ -92,4 +92,3 @@ class Enquiry(PersonalDetails, PropertyDetails):
     
     def get_absolute_url(self):
         return reverse("adviser-list")
-

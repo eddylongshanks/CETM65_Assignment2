@@ -1,7 +1,5 @@
 {% extends "_layout.html" %}
-
 {% block title %}Enquiry Details{% endblock %}
-
 {% block content %}
 
 <div class="container">
@@ -40,7 +38,7 @@
 
             <div class="flex-item">
                 <h4>Extra Information</h4>
-                <p>                
+                <div>                
                     {{ object.first_name }} is looking for a 
                     {% if object.mortgage_type == 'NH' %}
                         <span style="font-weight: bolder;">New House</span>.
@@ -57,29 +55,34 @@
                     {% elif object.preferred_time_to_contact == 'S' %}
                         on <span style="font-weight: bolder;">Saturday</span>.
                     {% endif %}
-                </p>
+                </div>
             </div>
-
-            
         </div>
 
         <hr>
-
        
         <div class="field-check-box">
             <fieldset>
-                <!-- {{ form.has_been_contacted }} -->
-                <input id="has-been-contacted" type="checkbox" />
-                <label for="has-been-contacted">Customer Contacted?</label>
+                {{ form.has_been_contacted }}
+                <label for="id_has_been_contacted">Customer Contacted?</label>
             </fieldset>
             <div class="field-hint">Check this box once you have contacted the customer and click below to submit the form.</div>
         </div>
 
-        <div class="field">
+        <div class="enquiry-buttons">
             <button type="submit" id="submit">Submit</button>
             <a href="{% url 'adviser-list' %}" class="button button-secondary">Cancel</a>
         </div>
     </form>
+
+    <hr>
+
+    {% if user.is_authenticated %}        
+        <div class="logout-align">
+            <a class="button button-danger" href="{% url 'logout' %}">Log Out</a>
+        </div>        
+    {% endif %}
 </div>
+
 
 {% endblock %}
