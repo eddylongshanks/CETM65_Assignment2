@@ -23,3 +23,6 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='adviser/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='adviser/logout.html'), name='logout'),
 ]
+
+handler404 = 'initial_enquiry.views.error_404'
+handler500 = 'initial_enquiry.views.error_500'

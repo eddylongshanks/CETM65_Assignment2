@@ -100,9 +100,15 @@ class EnquiryListView(LoginRequiredMixin, ListView):
 
 class EnquiryUpdateView(LoginRequiredMixin, UpdateView):
     model = Enquiry
+    template_name = "adviser/enquiry_form.html"
     fields = [ 'has_been_contacted' ]
 
 
+def error_404(request, exception):
+    return render(request, 'error/404.html', status=404)
+
+def error_500(request):
+    return render(request, 'error/500.html', status=500)
 
 # to remove
 
