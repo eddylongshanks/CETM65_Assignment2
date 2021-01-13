@@ -3,7 +3,7 @@ admin file for the enquiry creator
 """
 
 from django.contrib import admin
-from user.models import Enquiry
+from initial_enquiry.models import Enquiry
 
 # Register your models here.
 
