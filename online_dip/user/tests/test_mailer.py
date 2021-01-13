@@ -16,7 +16,7 @@ class TestEmailSender(TestCase):
                 'email': 'steve@example.co.uk',
                 'preferred_time_to_contact': 'S',
             }
-        self.mailer = EmailSender(customer_details_data)
+        self.mailer = EmailSender(customer_details_data, True)
 
     def tearDown(self):
         customer_details_data = None

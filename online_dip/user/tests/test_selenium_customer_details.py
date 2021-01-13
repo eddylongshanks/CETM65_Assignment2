@@ -26,7 +26,7 @@ class TestJourneyCustomerDetails(TestCase):
         self.driver.get("http://127.0.0.1:8000/customer_details")
         self.assertIn("Customer Details", self.driver.title)
 
-        last_name_field = self.driver.find_element_by_id("last_name")
+        last_name_field = self.driver.find_element_by_id("id_last_name")
         last_name_field.send_keys("test_last_name")
         address_building_field = self.driver.find_element_by_id("id_building")
         address_building_field.send_keys("test_address_building")
@@ -100,7 +100,7 @@ class TestJourneyCustomerDetails(TestCase):
 
         first_name_field = self.driver.find_element_by_id("id_first_name")
         first_name_field.send_keys("test_first_name")
-        last_name_field = self.driver.find_element_by_id("last_name")
+        last_name_field = self.driver.find_element_by_id("id_last_name")
         last_name_field.send_keys("test_last_name")
         address_building_field = self.driver.find_element_by_id("id_building")
         address_building_field.send_keys("test_address_building")
@@ -136,7 +136,7 @@ class TestJourneyCustomerDetails(TestCase):
 
         first_name_field = self.driver.find_element_by_id("id_first_name")
         first_name_field.send_keys("test_first_name")
-        last_name_field = self.driver.find_element_by_id("last_name")
+        last_name_field = self.driver.find_element_by_id("id_last_name")
         last_name_field.send_keys("test_last_name")
         address_building_field = self.driver.find_element_by_id("id_building")
         address_building_field.send_keys("test_address_building")
@@ -174,7 +174,7 @@ class TestJourneyCustomerDetails(TestCase):
 
         first_name_field = self.driver.find_element_by_id("id_first_name")
         first_name_field.send_keys("test_first_name")
-        last_name_field = self.driver.find_element_by_id("last_name")
+        last_name_field = self.driver.find_element_by_id("id_last_name")
         last_name_field.send_keys("test_last_name")
         address_building_field = self.driver.find_element_by_id("id_building")
         address_building_field.send_keys("test_address_building")
@@ -199,6 +199,3 @@ class TestJourneyCustomerDetails(TestCase):
         # Assert
 
         self.assertIn(expected_page_title, self.driver.title)
-
-if __name__ == "__main__":
-    unittest.main()

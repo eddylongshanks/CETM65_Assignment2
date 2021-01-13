@@ -17,7 +17,7 @@ class TestJourneyCreateEnquiry(TestCase):
 
         first_name_field = self.driver.find_element_by_id("id_first_name")
         first_name_field.send_keys("test_first_name")
-        last_name_field = self.driver.find_element_by_id("last_name")
+        last_name_field = self.driver.find_element_by_id("id_last_name")
         last_name_field.send_keys("test_last_name")
         address_building_field = self.driver.find_element_by_id("id_building")
         address_building_field.send_keys("test_address_building")
@@ -158,7 +158,3 @@ class TestJourneyCreateEnquiry(TestCase):
         # Assert
 
         self.assertIn(expected_page, self.driver.title)
-
-
-if __name__ == "__main__":
-    unittest.main()
