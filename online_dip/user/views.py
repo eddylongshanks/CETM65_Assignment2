@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, UpdateView
+from django.conf import settings
 from .forms import CustomerDetailsForm, PropertyDetailsForm, CustomerForm
 from .models import Enquiry
 from .helpers.providers import EnquiryProvider
@@ -62,9 +63,12 @@ def property_details(request):
 
             enquiry.save()
 
-            # Send a confirmation email to the customer only after saving the enquiry
-            mailer = EmailSender(enquiry_data.get_list())
-            mailer.send()
+            # Check if email functionality is enabled
+            # Send a confirmation email to the customer
+            email_enabled = settings.ENABLE_EMAIL
+            if email_enabled:
+                mailer = EmailSender(enquiry_data.get_list(), email_enabled)
+                mailer.send()
 
             return redirect("thank_you")
     else:
@@ -84,14 +88,6 @@ def thank_you(request):
 
     return render(request, "thank_you.html")
 
-# @login_required
-# def adviser(request):
-#     customers =  Customer.objects.all()
-
-#     context = {
-#         "customers": customers
-#     }
-#     return render(request, "adviser/enquiry_list.html", context)
 
 class EnquiryListView(LoginRequiredMixin, ListView):
     model = Enquiry
@@ -126,7 +122,7 @@ def emailtest(request):
                 'email': 'chris@holmescentral.co.uk',
                 'preferred_time_to_contact': 'S',
             }
-    mailer = EmailSender(customer_details_data)
+    mailer = EmailSender(customer_details_data, True)
 
     mailer.send()
     return HttpResponse(mailer)

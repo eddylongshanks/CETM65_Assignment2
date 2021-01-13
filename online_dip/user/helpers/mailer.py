@@ -3,10 +3,15 @@
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
+
 class EmailSender():
     """ Handles the sending of email """
 
-    def __init__(self, customer_data):
+    def __init__(self, customer_data, email_enabled):
+
+        if not email_enabled:
+            raise PermissionError("EmailSender is disabled. Enable it with the setting: ENABLE_MAIL in settings.py")
+
         self.address = customer_data["email"]
         self.message = 'Thank you for your enquiry. A Mortgage Adviser will be in touch in the next few days'
         self.subject = 'Newcastle Building Society - Request for Online Decision in Principle'
