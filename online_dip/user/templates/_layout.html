@@ -25,15 +25,6 @@
         {% endblock %}
     </div>
     
-    {% if user.is_authenticated %}
-    <div class="content">
-        <div class="adviser-container">
-            <div class="logout-align">
-                <a class="button button-danger" href="{% url 'logout' %}">Log Out</a>
-            </div>
-        </div>
-    </div>
-    {% endif %}
 
     <footer>
         <div class="container">
@@ -45,12 +36,10 @@
                 <li><a href="https://www.newcastle.co.uk/complaints/" target="_blank">Complaints</a></li>
                 <li><a href="https://online.newcastle.co.uk/OFIS/MoreInfo.aspx?MoreInfoRef=Help">Help</a></li>
             </ul>
-            <p>
-                &copy; Newcastle Building Society. All Rights Reserved. <br />
-                <address>Principal Office, Portland House, New Bridge Street, Newcastle upon Tyne, NE1 8AL.</address>
-                Newcastle Building Society is authorised by the Prudential Regulation Authority and regulated by the Financial Conduct Authority and the Prudential Regulation Authority.<br />
-                Newcastle Building Society is registered on the Financial Services Register under the firm reference number 156058.
-            </p>
+            <p>&copy; Newcastle Building Society. All Rights Reserved.</p>
+            <p><address>Principal Office, Portland House, New Bridge Street, Newcastle upon Tyne, NE1 8AL.</address></p>
+            <p>Newcastle Building Society is authorised by the Prudential Regulation Authority and regulated by the Financial Conduct Authority and the Prudential Regulation Authority.</p>
+            <p>Newcastle Building Society is registered on the Financial Services Register under the firm reference number 156058.</p>
         </div>
     </footer>
     </body>

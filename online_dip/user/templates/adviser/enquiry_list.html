@@ -8,58 +8,32 @@
     <h1>Active Enquiries</h1>
     <hr>
     
-    <ul class="responsive-table">
+    <ul class="enquiry-table">
         <li class="table-header">
             <div class="col col-1">Customer Name</div>
             <div class="col col-2">Telephone Number</div>
-            <div class="col col-3">Contacted?</div>
-            <div class="col col-4">Date of Enquiry</div>
-            <div class="col col-5"></div>
+            <div class="col col-3">Date of Enquiry</div>
+            <div class="col col-4"></div>
         </li>
         {% for customer in customers %}
+        <a href="{% url 'adviser-update' customer.personaldetails_ptr_id %}">
             <li class="table-row">
-                <div class="col col-1" data-label="Customer Name">{{ customer.first_name }} {{ customer.last_name }}</div>
-                <div class="col col-2" data-label="Telephone Number">{{ customer.telephone_number }}</div>
-                <div class="col col-3" data-label="Contacted?">{{ customer.has_been_contacted }}</div>
-                <div class="col col-4" data-label="Date of Enquiry">{{ customer.date_created }}</div>
-                <div class="col col-5" data-label=""><a class="button button-small" href="{% url 'adviser-update' customer.personaldetails_ptr_id %}">View Enquiry</a></div>
+                <div class="col col-1 col-data" data-label="Customer Name">{{ customer.first_name }} {{ customer.last_name }}</div>
+                <div class="col col-2 col-data" data-label="Telephone Number">{{ customer.telephone_number }}</div>
+                <div class="col col-3 col-data" data-label="Date of Enquiry">{{ customer.date_created }}</div>
+                <div class="col col-4" data-label=""><button class="button button-small" >View Enquiry</button></div>
             </li>
+        </a>
         {% endfor %}
     </ul>
 
-    
+    <hr>
 
-    <!-- <form name="odip-form" method="POST">
-        {% csrf_token %}
-
-        {% if form.errors %}
-        <div class="error-summary" tabindex="-1">
-            <h2>There's been a problem</h2>
-            <ul>            
-            {% for key, value in form.errors.items %}
-                <li>{{ value }}</li>
-            {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
-
-        <div class="field">
-            <label class="field-label">{{ form.username.label }}</label>            
-            {{ form.username }}
-        </div> 
-
-        <div class="field">
-            <label class="field-label">{{ form.password.label }}</label>
-            <span class="field-error field-validation-valid"></span>
-            {{ form.password }}            
-        </div>
-
-        <div class="field">
-            <button type="submit" id="submit">Login</button>
-        </div>
-    </form> -->
+    {% if user.is_authenticated %}        
+        <div class="logout-align">
+            <a class="button button-danger" href="{% url 'logout' %}">Log Out</a>
+        </div>        
+    {% endif %}
 </div>
-
-    
-
+  
 {% endblock %}

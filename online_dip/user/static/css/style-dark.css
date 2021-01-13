@@ -11,43 +11,38 @@
 
     input {        
         background: #333;
-        border: 2px solid #555;
+        border-color: #555;
         color: #fff;
     }
 
-    h1 {
-        color: rgb(69, 162, 224);    
+    h1, h3 {
+        color: rgb(154, 190, 214);    
     }
-
-    hr {        
-        border-top: 1px dashed #555;
-        color: #333;        
-    }
-
-    h3 {        
-        color:  rgb(69, 162, 224);
-    }
-
+    
+    
     h4 {        
         color:  rgb(126, 183, 223);
+    }
+    
+    hr {        
+        border-color: #555;
+        color: #333;        
     }
 
     button,
     a.button {        
         background:  #5f7380;
-        color: #000;
+        color: #fff;
     }
 
         button:hover,
         a.button:hover {
-            background: #96afbe;
+            background: #728999;
         }
 
         button.button-danger,
         a.button-danger {
             background: rgb(182, 27, 0);
-            color: #fff;
-
         }
             button.button-danger:hover,
             a.button-danger:hover {
@@ -64,17 +59,17 @@
             }
 
     .input-validation-error {
-        border: 3px solid #d4351c;
+        border-color: #d4351c;
     }
 
     button:focus,
     a.button:focus,
     .error-summary:focus {
-        box-shadow: 0 0 1px 4px #c08d01;        
+        box-shadow: 0 0 1px 4px #ffbb00;        
     }
 
     input:focus {
-        box-shadow: 0 0 1px 4px #c08d01;
+        box-shadow: 0 0 1px 4px #ffbb00;
         background-color: rgb(41, 41, 41);
     }
 
@@ -83,47 +78,41 @@
     }
     
     .logo-box {
-        background-image: url(../images/NewcastleBuildingSocietyLogo-white.svg); 
-        width: 800px; 
-        height: 100px;
-        display:inline-block;
-        background-position: left; 
-        background-repeat: no-repeat; 
-        background-size: auto; 
+        background-image: url(../images/NewcastleBuildingSocietyLogo-white.svg);
     }
 
     /* Radio Button */
 
     .field-radio-button label:before {        
-        border: 2px solid #555;        
+        border-color: #555;        
     }
 
         .field-radio-button input:checked ~ label:after {            
-            border: 5px solid #555;            
+            border-color: #555;            
             background: #333;
         }
 
         .field-radio-button input:focus ~ label:before {            
-            box-shadow: 0 0 0 2px #c08d01;
+            box-shadow: 0 0 0 2px #ffbb00;
         }
     
     /* Check box */
 
     .field-check-box label:before {            
-        border: 2px solid #fff;            
+        border-color: #fff;            
     }
 
         .field-check-box input:checked ~ label:after {
-            border: solid #fff;            
+            border-color: #fff;            
             border-width: 0 0 3px 3px;
         }
 
         .field-check-box input:focus ~ label:before {
-            box-shadow: 0 0 0 2px #c08d01;
+            box-shadow: 0 0 0 2px #ffbb00;
         }
 
     .field-prefix-group div:first-child {        
-        border: 2px solid #555;        
+        border-color: #555;        
         background-color: #333;
     }
 
@@ -134,7 +123,7 @@
     /* Error Styling */
     .error-summary {
         background: rgb(31, 31, 31);
-        border: 4px solid #d4351c;
+        border-color:  #d4351c;
         color: #d4351c;
     }
 
@@ -153,24 +142,44 @@
 
     /* Table */
 
-    .responsive-table .table-header {
+    .enquiry-table .table-header {
         background-color: #33363b;
         color: #fff;
+        border: 1px solid rgb(79, 88, 95, 0.6);
+        box-shadow: 2px 2px 2px 0px rgba(9, 10, 10, 0.6);
     }
 
-        .responsive-table .table-row {
-            background-color: rgb(36, 36, 36);
+        .enquiry-table .table-row {
+            background-color: rgb(40, 40, 40);
+            border: 1px solid rgba(90, 101, 109, 0.4);
+            box-shadow: 2px 2px 2px 0px rgba(9, 10, 10, 0.4);
+        }
+
+        .enquiry-table .table-row:hover {
+            background-color: rgb(48, 50, 51);
+            border: 1px solid rgba(79, 88, 95, 0.6);
+            box-shadow: 2px 2px 2px 0px rgba(9, 10, 10, 0.8);
         }
 
         @media all and (max-width: 767px) {
-            .responsive-table .col:before {
+            .enquiry-table .col:before {
                 color: #6C7A89;                
+            }
+
+            .enquiry-table .table-row {
+                border: 1px solid rgb(7, 8, 8);
+                box-shadow: 2px 2px 2px 0px rgba(9, 10, 10, 1);                
+            }
+
+            .enquiry-table .table-row:hover {
+                background-color: rgb(46, 46, 46);
+                border: 1px solid rgb(7, 8, 8);
             }
         }
 
     .flex-item {
         background: rgb(36, 36, 36);            
-        border: 1px solid #555;
+        border-color:  #555;
     }        
 
     footer {
@@ -181,15 +190,5 @@
         footer a,
         footer a:visited {
             color: #fff;
-        }    
-    
-    @media only screen and (max-width: 480px) {
-        
-        .logo-box {
-            width: 200px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
         }
-    }
 }
