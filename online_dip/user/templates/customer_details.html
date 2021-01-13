@@ -1,7 +1,5 @@
 {% extends "_layout.html" %}
-
 {% block title %}Customer Details{% endblock %}
-
 {% block content %}
 
 <div class="container">
@@ -27,8 +25,7 @@
 
         <div class="field">
             <label class="field-label">{{ form.last_name.label }}</label>
-            <span class="field-error field-validation-valid"></span>
-            <input id="last_name" type="text" name="last_name" value="" />            
+            {{ form.last_name }}
         </div>
 
         <h3>What is your Address?</h3>

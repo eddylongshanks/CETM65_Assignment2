@@ -22,6 +22,7 @@ class CustomerDetailsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        # Override default "required" validation message to mention the field name
         for field in self.fields.values():
             field.error_messages = {'required' : f'{field.label} is required'}
 
@@ -41,6 +42,7 @@ class PropertyDetailsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        # Override default "required" validation message to mention the field name
         for field in self.fields.values():
             field.error_messages = {'required' : f'{field.label} is required'}
 

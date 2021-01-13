@@ -89,6 +89,6 @@ class Enquiry(PersonalDetails, PropertyDetails):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name} - Tel: {self.telephone_number}'
-    
+
     def get_absolute_url(self):
         return reverse("adviser-list")
