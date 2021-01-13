@@ -1,16 +1,11 @@
-"""
-form classes for the enquiry creator
-"""
+""" form classes for the enquiry creator """
 
 from django import forms
 from .models import Enquiry
-# from django.utils.translation import gettext_lazy as _
 
 
 class CustomerDetailsForm(forms.ModelForm):
-    """
-    Page 1 of the oDip Enquiry journey
-    """
+    """ Page 1 of the Initial Enquiry journey """
 
     class Meta:
         model = Enquiry
@@ -28,9 +23,7 @@ class CustomerDetailsForm(forms.ModelForm):
 
 
 class PropertyDetailsForm(forms.ModelForm):
-    """
-    Page 2 of the oDip Enquiry journey
-    """
+    """ Page 2 of the Initial Enquiry journey """
 
     class Meta:
         model = Enquiry
@@ -48,9 +41,7 @@ class PropertyDetailsForm(forms.ModelForm):
 
 # SMELL rename to Enquiry?
 class CustomerForm(forms.ModelForm):
-    """
-    Final full enquiry model
-    """
+    """ Final full enquiry model """
 
     class Meta:
         model = Enquiry
