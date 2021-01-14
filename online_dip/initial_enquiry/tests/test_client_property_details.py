@@ -4,7 +4,7 @@ from django.test import TestCase, Client, tag
 from ..models import Enquiry
 
 @tag('fast')
-class TestClientCreateEnquiry(TestCase):
+class TestClientPropertyDetails(TestCase):
     """ Tests for verifying HttpResponses using Client """
 
     def setUp(self):
@@ -41,7 +41,7 @@ class TestClientCreateEnquiry(TestCase):
                 'town': 'town',
                 'county': 'county',
                 'postcode': 'postcode',
-                'telephone_number': '0123',
+                'telephone_number': '07777777777',
                 'email': 'me@me.com',
                 'preferred_time_to_contact': 'S'
             }
@@ -75,7 +75,7 @@ class TestClientCreateEnquiry(TestCase):
                 'town': 'town',
                 'county': 'county',
                 'postcode': 'postcode',
-                'telephone_number': '0123',
+                'telephone_number': '07777777777',
                 'email': 'me@me.com',
                 'preferred_time_to_contact': 'S'
             }
@@ -105,7 +105,7 @@ class TestClientCreateEnquiry(TestCase):
                 'town': 'town',
                 'county': 'county',
                 'postcode': 'postcode',
-                'telephone_number': '0123',
+                'telephone_number': '07777777777',
                 'email': 'me@me.com',
                 'preferred_time_to_contact': 'S'
             }

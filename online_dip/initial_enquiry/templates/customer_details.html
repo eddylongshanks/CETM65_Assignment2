@@ -1,9 +1,9 @@
 {% extends "_layout.html" %}
-{% block title %}Customer Details{% endblock %}
+{% block title %}Your Details{% endblock %}
 {% block content %}
 
 <div class="container">
-    <h1>Customer Details</h1>
+    <h1>Your Details</h1>
     <form action="{% url 'customer_details' %}" name="odip-form" method="POST">
         {% csrf_token %}
 

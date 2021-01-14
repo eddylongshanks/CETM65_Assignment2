@@ -55,7 +55,7 @@ class TestClientCustomerDetails(TestCase):
                 'town': 'town',
                 'county': 'county',
                 'postcode': 'postcode',
-                'telephone_number': '0123',
+                'telephone_number': '07777777777',
                 'email': 'me@me.com',
                 'preferred_time_to_contact': 'S'
             }

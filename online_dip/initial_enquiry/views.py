@@ -7,16 +7,15 @@ from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, UpdateView
 from django.conf import settings
-from .forms import CustomerDetailsForm, PropertyDetailsForm, CustomerForm
+from .forms import CustomerDetailsForm, PropertyDetailsForm, EnquiryForm
 from .models import Enquiry
 from .helpers.providers import EnquiryProvider
 from .helpers.mailer import EmailSender
 
 
 def customer_details(request):
-    """
-    Customer Details form, first page of Enquiry.
-    """
+    """ Customer Details form, first page of Enquiry """
+
     # Set initial response code for testing purposes
     response_code = 200
 
@@ -38,9 +37,8 @@ def customer_details(request):
 
 
 def property_details(request):
-    """
-    Property Details form, second page of Enquiry.
-    """
+    """ Property Details form, second page of Enquiry """
+
     # Set initial response code for testing purposes
     response_code = 400
 
@@ -60,7 +58,7 @@ def property_details(request):
             enquiry_data.add(customer_details_data)
             completed_data = enquiry_data.get_list()
 
-            enquiry = CustomerForm(completed_data)
+            enquiry = EnquiryForm(completed_data)
 
             # Perform final validation, redirect to start if there is invalid data
             if not enquiry.is_valid():
@@ -101,7 +99,9 @@ def thank_you(request):
     return render(request, "thank_you.html")
 
 
-class EnquiryListView(LoginRequiredMixin, ListView):
+class EnquiryListView(LoginRequiredMixin, ListView): # pylint: disable=too-many-ancestors
+    """ Class-based view, to show the List of Enquiries """
+
     model = Enquiry
     template_name = "adviser/enquiry_list.html"
     context_object_name = "customers"
@@ -111,84 +111,17 @@ class EnquiryListView(LoginRequiredMixin, ListView):
 
 
 class EnquiryUpdateView(LoginRequiredMixin, UpdateView):
+    """ Class-based view, to show a detailed view of a chosen Enquiry """
+
     model = Enquiry
     template_name = "adviser/enquiry_form.html"
     fields = [ 'has_been_contacted' ]
 
 
 def error_404(request, exception):
+    """ Custom 404 error handler """
     return render(request, 'error/404.html', status=404)
 
 def error_500(request):
+    """ Custom 500 error handler """
     return render(request, 'error/500.html', status=500)
-
-
-
-
-# to remove
-
-def advisertest(request):
-    customers =  Enquiry.objects.all()
-
-    context = {
-        "customers": customers
-    }
-    return render(request, "adviser/enquiry_list.html", context)
-
-
-def emailtest(request):
-
-    customer_details_data = {
-                'first_name': 'Katie',
-                'email': 'chris@holmescentral.co.uk',
-                'preferred_time_to_contact': 'S',
-            }
-    mailer = EmailSender(customer_details_data, True)
-
-    mailer.send()
-    return HttpResponse(mailer)
-
-# def testroute(request):
-#     """
-#     Test form
-#     """
-
-#     cust = {
-#         "first_name": "steve",
-#         "last_name": "smith",
-#         "telephone_number": "123",
-#         "preferred_time_to_contact": "S",
-#     }
-#     prop = {
-#         "annual_income": "2",
-#         "loan_amount": "3",
-#         "property_value": "4",
-#         "mortgage_type": "RM",
-#     }
-
-#     custfull = {
-#         "first_name": "steve",
-#         "last_name": "smith",
-#         "telephone_number": "123",
-#         "preferred_time_to_contact": "S",
-#         "annual_income": "2",
-#         "loan_amount": "3",
-#         "property_value": "4",
-#         "mortgage_type": "RM",
-#     }
-
-
-#     cust_form = CustomerDetailsForm(cust).save(commit=False)
-#     prop_form = PropertyDetailsForm(prop).save(commit=False)
-
-#     customer_data = EnquiryProvider()
-#     customer_data.add(cust)
-#     customer_data.add(prop)
-#     print(customer_data)
-
-#     # enq = CustomerForm(custfull).save(commit=False)
-#     # cust = Customer.objects.create(**cust, **prop)
-#     # cust.save()
-#     # print(cust)
-
-#     return HttpResponse(customer_data)
