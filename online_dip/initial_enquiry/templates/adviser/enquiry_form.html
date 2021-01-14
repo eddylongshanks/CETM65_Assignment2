@@ -1,4 +1,5 @@
 {% extends "_layout.html" %}
+{% load humanize %}
 {% block title %}Enquiry Details{% endblock %}
 {% block content %}
 
@@ -29,11 +30,11 @@
 
             <div class="flex-item">
                 <h4>Annual Income</h4>
-                <div>£{{ object.annual_income }}</div>
+                <div>£{{ object.annual_income|intcomma }}</div>
                 <h4>Requested Loan Amount</h4>
-                <div>£{{ object.loan_amount }}</div>
+                <div>£{{ object.loan_amount|intcomma }}</div>
                 <h4>Property Value</h4>
-                <div>£{{ object.property_value }}</div>                
+                <div>£{{ object.property_value|intcomma }}</div>                
             </div>
 
             <div class="flex-item">
@@ -45,7 +46,7 @@
                     {% elif object.mortgage_type == 'RM' %}
                         <span style="font-weight: bolder;">Remortgage</span> on their existing property.
                     {% endif %}
-                    The enquiry was created on <span style="font-weight: bolder;">{{ object.date_created|date }}</span> and they would prefer to be contacted
+                    The enquiry was created on <span style="font-weight: bolder;">{{ object.date_created }}</span> and they would prefer to be contacted
                     {% if object.preferred_time_to_contact == 'M' %}
                         <span style="font-weight: bolder;">in the morning</span>.
                     {% elif object.preferred_time_to_contact == 'EA' %}

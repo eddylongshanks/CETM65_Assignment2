@@ -1,7 +1,6 @@
-"""
-models file for the enquiry creator
-"""
+""" models file for the enquiry creator """
 
+from django.core.validators import RegexValidator
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
@@ -27,10 +26,14 @@ class Address(models.Model):
 class PersonalDetails(Address):
     """ Personal Details Model, holding customer information from page 1 """
 
+    # Custom Regex validation for telephone number
+    phone_regex = RegexValidator(regex=r'^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$',
+        message="Provide a valid UK Phone Number.")
+
     personal_details_id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=40, verbose_name="First Name")
     last_name = models.CharField(max_length=40, verbose_name="Last Name")
-    telephone_number = models.CharField(max_length=25, verbose_name="Telephone Number")
+    telephone_number = models.CharField(validators=[phone_regex], max_length=17, verbose_name="Telephone Number")
     email = models.EmailField(max_length=254, blank=True, verbose_name="Email Address")
 
     MORNING = 'M'

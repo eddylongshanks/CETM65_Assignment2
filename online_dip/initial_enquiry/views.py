@@ -21,7 +21,7 @@ def customer_details(request):
     response_code = 200
 
     if request.method == "POST":
-        form = CustomerDetailsForm(request.POST, use_required_attribute=False)  
+        form = CustomerDetailsForm(request.POST, use_required_attribute=False)
 
         if form.is_valid():
             # Save to the session to be retreived later
