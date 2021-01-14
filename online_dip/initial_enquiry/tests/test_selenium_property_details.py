@@ -4,13 +4,13 @@ from django.test import TestCase, tag
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-@tag('selenium_tests')
+@tag('slow', 'selenium')
 class TestJourneyCreateEnquiry(TestCase):
     """ Test class to create enquiry using selenium """
 
     def setUp(self):
         self.driver = webdriver.Chrome()
-        self.driver.get("http://127.0.0.1:8000/customer_details")
+        self.driver.get("http://127.0.0.1:8000/yourdetails")
         self.assertIn("Customer Details", self.driver.title)
 
         # Get to the Property Details Page
@@ -28,7 +28,7 @@ class TestJourneyCreateEnquiry(TestCase):
         address_county_field = self.driver.find_element_by_id("id_county")
         address_county_field.send_keys("test_address_county")
         address_postcode_field = self.driver.find_element_by_id("id_postcode")
-        address_postcode_field.send_keys("test_address_postcode")        
+        address_postcode_field.send_keys("postcode")
         telephone_number_field = self.driver.find_element_by_id("id_telephone_number")
         telephone_number_field.send_keys("123")
         email_field = self.driver.find_element_by_id("id_email")
@@ -46,11 +46,9 @@ class TestJourneyCreateEnquiry(TestCase):
         """ Missing Annual Income validation """
 
         # Arrange
-
         validation_message = "Annual Income is required"
 
         # Act
-
         loan_amount_field = self.driver.find_element_by_id("id_loan_amount")
         loan_amount_field.send_keys("6001")
         property_value_field = self.driver.find_element_by_id("id_property_value")
@@ -62,18 +60,15 @@ class TestJourneyCreateEnquiry(TestCase):
         btn_submit.click()
 
         # Assert
-
         self.assertTrue (validation_message in self.driver.page_source)
 
     def test_loan_amount_empty_should_show_validation_error(self):
         """ Missing Loan Amount validation """
 
         # Arrange
-
         validation_message = "Loan Amount is required"
 
         # Act
-
         annual_income_field = self.driver.find_element_by_id("id_annual_income")
         annual_income_field.send_keys("5001")
         property_value_field = self.driver.find_element_by_id("id_property_value")
@@ -85,18 +80,15 @@ class TestJourneyCreateEnquiry(TestCase):
         btn_submit.click()
 
         # Assert
-
         self.assertTrue (validation_message in self.driver.page_source)
 
     def test_property_value_empty_should_show_validation_error(self):
         """ Missing Property Value validation """
 
         # Arrange
-
         validation_message = "Property Value is required"
 
         # Act
-
         annual_income_field = self.driver.find_element_by_id("id_annual_income")
         annual_income_field.send_keys("5001")
         loan_amount_field = self.driver.find_element_by_id("id_loan_amount")
@@ -108,18 +100,15 @@ class TestJourneyCreateEnquiry(TestCase):
         btn_submit.click()
 
         # Assert
-
         self.assertTrue (validation_message in self.driver.page_source)
 
     def test_mortgage_type_unselected_should_show_validation_error(self):
         """ Missing Mortgage Type validation """
 
         # Arrange
-
         validation_message = "Mortgage Type is required"
 
         # Act
-
         annual_income_field = self.driver.find_element_by_id("id_annual_income")
         annual_income_field.send_keys("5001")
         loan_amount_field = self.driver.find_element_by_id("id_loan_amount")
@@ -131,18 +120,15 @@ class TestJourneyCreateEnquiry(TestCase):
         btn_submit.click()
 
         # Assert
-
         self.assertTrue (validation_message in self.driver.page_source)
     
     def test_valid_data_should_redirect(self):
         """ Valid Data should result in redirection """
 
         # Arrange
-
         expected_page = "Thank You"
 
         # Act
-
         annual_income_field = self.driver.find_element_by_id("id_annual_income")
         annual_income_field.send_keys("5001")
         loan_amount_field = self.driver.find_element_by_id("id_loan_amount")
@@ -156,5 +142,4 @@ class TestJourneyCreateEnquiry(TestCase):
         btn_submit.click()
 
         # Assert
-
         self.assertIn(expected_page, self.driver.title)

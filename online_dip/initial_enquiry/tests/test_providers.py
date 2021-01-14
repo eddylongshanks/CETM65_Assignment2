@@ -3,7 +3,7 @@
 from django.test import TestCase, tag
 from ..helpers.providers import EnquiryProvider
 
-@tag('provider_tests')
+@tag('fast')
 class TestEnquiryProvider(TestCase):
     """ Tests for EnquiryProvider object """
 
@@ -17,26 +17,22 @@ class TestEnquiryProvider(TestCase):
         """ A valid dictionary object should be added to the list """
 
         # Arrange
-
         expected_dictionary = {
             'testkey1' : 'testvalue1',
             'testkey2' : 'testvalue2',
         }
 
         # Act
-
         self.provider.add(expected_dictionary)
         actual_dictionary = self.provider.get_list()
 
         # Assert
-
         self.assertDictEqual(expected_dictionary, actual_dictionary)
 
-    def test_add_multiple_dict_objects_should_update_list(self):
+    def test_add_second_dict_object_should_update_list(self):
         """ Passing multiple dictionary objects should update the list """
 
         # Arrange
-
         first_dictionary = {
             'testkey1' : 'testvalue1',
             'testkey2' : 'testvalue2',
@@ -55,13 +51,11 @@ class TestEnquiryProvider(TestCase):
         }
 
         # Act
-
         self.provider.add(first_dictionary)
         self.provider.add(second_dictionary)
         actual_dictionary = self.provider.get_list()
 
         # Assert
-
         self.assertDictEqual(expected_dictionary, actual_dictionary)
 
     def test_add_non_dict_object_should_raise_value_error_exception(self):
@@ -71,24 +65,20 @@ class TestEnquiryProvider(TestCase):
         """
 
         # Arrange
-
         data = 5
         expected_message = "Object must be a Dictionary"
 
         # Act
-
         with self.assertRaises(TypeError) as context:
             self.provider.add(data)
 
         # Assert
-
         self.assertTrue(expected_message in str(context.exception))
 
-    def test_str_should_return_dictionary_as_string(self):
+    def test__str__should_return_dictionary_as_string(self):
         """ Ensure __str__ returns dictionary object as a string"""
 
         # Arrange
-
         dictionary = {
             'testkey1' : 'testvalue1',
             'testkey2' : 'testvalue2',
@@ -97,11 +87,8 @@ class TestEnquiryProvider(TestCase):
         expected_string = "{'testkey1': 'testvalue1', 'testkey2': 'testvalue2'}"
 
         # Act
-
         self.provider.add(dictionary)
         actual_string = self.provider.__str__()
 
         # Assert
-
-        # print(self.provider)
         self.assertEqual(expected_string, actual_string)

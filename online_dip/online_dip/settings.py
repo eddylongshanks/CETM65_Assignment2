@@ -126,7 +126,7 @@ LOGIN_URL = 'login'
 
 # Emailer Settings
 
-ENABLE_EMAIL = True
+ENABLE_EMAIL = False
 DEFAULT_FROM_EMAIL = os.environ.get('DJANGO_DEFAULT_FROM_EMAIL')
 EMAIL_HOST = os.environ.get('DJANGO_EMAIL_HOST')
 EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_EMAIL_HOST_PASSWORD')

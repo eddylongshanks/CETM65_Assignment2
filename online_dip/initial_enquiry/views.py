@@ -17,29 +17,34 @@ def customer_details(request):
     """
     Customer Details form, first page of Enquiry.
     """
+    # Set initial response code for testing purposes
+    response_code = 200
 
     if request.method == "POST":
-        form = CustomerDetailsForm(request.POST, use_required_attribute=False)
+        form = CustomerDetailsForm(request.POST, use_required_attribute=False)  
+
         if form.is_valid():
             # Save to the session to be retreived later
             request.session["customer_details"] = form.cleaned_data
             return redirect("property_details")
+        response_code = 400
     else:
         form = CustomerDetailsForm(use_required_attribute=False)
 
     context = {
         "form": form
     }
-
-    return render(request, "customer_details.html", context)
+    return render(request, "customer_details.html", context, status=response_code)
 
 
 def property_details(request):
     """
     Property Details form, second page of Enquiry.
     """
+    # Set initial response code for testing purposes
+    response_code = 400
 
-    # Session check to verify customer details are available
+    # Session check to verify journey integrity
     if not "customer_details" in request.session:
         return redirect("customer_details")
 
@@ -71,20 +76,27 @@ def property_details(request):
                 mailer.send()
 
             return redirect("thank_you")
+
     else:
+        # Generate a new form page and set response code
         form = PropertyDetailsForm(use_required_attribute=False)
+        response_code = 200
 
     context = {
         "form": form
     }
-    return render(request, "property_details.html", context)
+    return render(request, "property_details.html", context, status=response_code)
 
 
 def thank_you(request):
     """ Page displayed on submission complete """
 
+    # Session check to verify journey integrity
+    if not "customer_details" in request.session:
+        return redirect("customer_details")
+
     # Clean the session
-    request.session["customer_details"] = {}
+    del request.session["customer_details"]
 
     return render(request, "thank_you.html")
 
@@ -109,6 +121,9 @@ def error_404(request, exception):
 
 def error_500(request):
     return render(request, 'error/500.html', status=500)
+
+
+
 
 # to remove
 
