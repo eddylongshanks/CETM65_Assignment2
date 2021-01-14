@@ -53,8 +53,6 @@ class PersonalDetails(Address):
         verbose_name="Preferred Time to Call"
     )
 
-    # Add preferred time to be contacted?
-
     def __str__(self):
         return f'{self.first_name} {self.last_name} - Tel: {self.telephone_number}'
 

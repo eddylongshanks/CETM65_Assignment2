@@ -17,7 +17,7 @@ class TestJourneyThankYou(TestCase):
         """ Direct Access should redirect """
 
         # Arrange
-        user_location = "Customer Details"
+        user_location = "Your Details"
 
         # Act
         self.driver.get("http://127.0.0.1:8000/thankyou")
