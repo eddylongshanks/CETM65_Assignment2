@@ -109,7 +109,7 @@ label {
     margin-bottom: .5rem;
 }
 
-input {
+.field input {
     padding: 8px;
     margin-bottom: 0px;
     width: 100%;
@@ -202,7 +202,7 @@ a.button {
     border: 3px solid #d4351c;
 }
 
-input:focus,
+.field input:focus,
 button:focus,
 a.button:focus,
 .error-summary:focus {
@@ -346,6 +346,19 @@ a {
     background-color: #EEE;
 }
 
+.field-suffix-group {
+    display: flex;
+}
+
+.field-suffix-group div:nth-child(2) {
+    font-size: 1.125em;
+    font-weight: bold;
+    padding: 10px 14px;
+    border: 2px solid #BBB;
+    border-left: 0;
+    background-color: #EEE;
+}
+
 .field-hint {
     display: block;
     color: #555;
@@ -449,20 +462,34 @@ a {
     background-color: rgb(252, 239, 239);
 }
 
-#ltv_value {
+.field-ltv {
     margin-left: 40px;
-    margin-bottom: 10px;
     display: block;
     font-weight: 400;
     font-size: xx-large;
     text-align: center;
     display: inline-block;
-    padding: 8px;
-    width: 5rem;
+    width: 80px;
     font-size: 1.125em;
     filter: none;
     border: 2px solid #BBB;
     background-color: #EEE;
+}
+
+.field-ltv input {
+    padding: 8px;
+    margin-bottom: 0px;
+    width: 100%;
+    font-size: 1.125em;
+    filter: none;
+    border: none;
+    background-color: inherit;    
+}
+
+.field-ltv input:read-only {
+    box-shadow: none;
+    background-color: inherit;
+    cursor: default;
 }
 
 

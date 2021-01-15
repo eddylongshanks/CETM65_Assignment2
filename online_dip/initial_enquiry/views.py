@@ -9,6 +9,7 @@ from .forms import CustomerDetailsForm, PropertyDetailsForm, EnquiryForm
 from .models import Enquiry
 from .helpers.providers import EnquiryProvider
 from .helpers.mailer import EmailSender
+from .helpers.calculators import LTVCalculator
 
 
 def customer_details(request):
@@ -45,10 +46,16 @@ def property_details(request):
         return redirect("customer_details")
 
     if request.method =="POST":
-        # Smell: need to validate ltv value
-        # doesnt need passing in because ill receive the loan value and the property value!
-        # can just pass values into what will be the LtvValidator
         form = PropertyDetailsForm(request.POST, use_required_attribute=False)
+
+        # Validate LTV
+        # loan_amount = int(request.POST.get('loan_amount', None))
+        # property_value = int(request.POST.get('property_value', None))
+
+        # ltv = LTVCalculator(loan_amount, property_value)
+        # if not ltv.is_acceptable():
+        #     form.add_error(None, "LTV is too high, reduce Loan Amount")
+
         if form.is_valid():
             property_details_data = form.cleaned_data
             customer_details_data = request.session["customer_details"]
@@ -89,19 +96,14 @@ def property_details(request):
 
 def calculate_ltv(request):
 
-    # convert to int?
-    try:
-        loan_amount = int(request.GET.get('loanamount', None))
-        property_value = int(request.GET.get('propertyvalue', None))
-    except:
-        loan_amount = 0
-        property_value = 0
+    loan_amount = int(request.GET.get('loanamount', None))
+    property_value = int(request.GET.get('propertyvalue', None))
 
-    # Calculate ratio of loan to value, then cap at 0.1 (≡100%)
-    ltv_result = min(float(loan_amount) / float(property_value), 1.0)
-    ltv_percentage = "{:.0%}".format(ltv_result)
+    ltv = LTVCalculator(loan_amount, property_value)
+    ltv_value = ltv.get_value()
 
-    if ltv_result <= 0.5:
+    # Check if the value is within specified acceptance criteria
+    if ltv.is_acceptable():
         ltv_css = "ltv_acceptable"
         visibility_css = "hidden"
     else:
@@ -109,7 +111,7 @@ def calculate_ltv(request):
         visibility_css = "visible"
 
     data = {
-        'ltv': ltv_percentage,
+        'ltv': ltv_value,
         'ltv_css': ltv_css,
         'visibility_css': visibility_css,
     }
