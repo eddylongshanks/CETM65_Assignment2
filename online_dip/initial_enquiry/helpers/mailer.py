@@ -30,7 +30,7 @@ class EmailSender():
             from_email=None,
             recipient_list=[self.address],
             html_message=self.html_message,
-            fail_silently=False,
+            fail_silently=True,
         )
 
     def __str__(self):

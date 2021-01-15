@@ -47,9 +47,10 @@ class TestClientPropertyDetails(TestCase):
             }
         property_details_data = {
                 'annual_income': '300',
-                'loan_amount': '400',
-                'property_value': '500',
-                'mortgage_type': 'RM'
+                'loan_amount': '500',
+                'property_value': '1000',
+                'mortgage_type': 'RM',
+                'ltv_value': '50'
             }
         session = self.client.session
         session['customer_details'] = customer_details_data
@@ -111,9 +112,10 @@ class TestClientPropertyDetails(TestCase):
             }
         property_details_data = {
                 'annual_income': '300',
-                'loan_amount': '400',
-                'property_value': '500',
-                'mortgage_type': 'RM'
+                'loan_amount': '500',
+                'property_value': '1000',
+                'mortgage_type': 'RM',
+                'ltv_value': '50'
             }
         session = self.client.session
         session['customer_details'] = customer_details_data
