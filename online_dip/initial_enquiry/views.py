@@ -47,15 +47,6 @@ def property_details(request):
 
     if request.method =="POST":
         form = PropertyDetailsForm(request.POST, use_required_attribute=False)
-
-        # Validate LTV
-        # loan_amount = int(request.POST.get('loan_amount', None))
-        # property_value = int(request.POST.get('property_value', None))
-
-        # ltv = LTVCalculator(loan_amount, property_value)
-        # if not ltv.is_acceptable():
-        #     form.add_error(None, "LTV is too high, reduce Loan Amount")
-
         if form.is_valid():
             property_details_data = form.cleaned_data
             customer_details_data = request.session["customer_details"]

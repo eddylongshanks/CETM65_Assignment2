@@ -27,7 +27,7 @@ class PropertyDetailsForm(forms.ModelForm):
     """ Page 2 of the Initial Enquiry journey """
 
     ltv_value = forms.FloatField(max_value=100, min_value=0, label="LTV")
-    
+
     class Meta:
         model = Enquiry
         fields = ['annual_income', 'loan_amount', 'property_value', 'mortgage_type', 'ltv_value']
@@ -46,9 +46,6 @@ class PropertyDetailsForm(forms.ModelForm):
         """ Validates LTV against MAX_LTV """
         max_ltv = settings.MAX_LTV
         ltv = self.cleaned_data['ltv_value']
-
-        print(max_ltv)
-        print(ltv)
 
         if ltv > max_ltv:
             raise forms.ValidationError("LTV is too high, consider reducing your Loan Amount")
