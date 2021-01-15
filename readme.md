@@ -51,10 +51,10 @@ SSL is enabled by default but can be disabled by changing the setting EMAIL_USE_
 
 ### Maximum LTV
 
-The Maximum Loan to Value (LTV) can be set within the ettings.py with the following variable:
+The Maximum Loan to Value (LTV) can be set within the settings.py with the following variable:
 
 ```python
-MAX_LTV
+MAX_LTV = 80
 ```
 
 This value must be set between 0 and 100.
