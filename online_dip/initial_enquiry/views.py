@@ -1,9 +1,6 @@
-"""
-The main view file, handles all get and post requests to create an Enquiry.
-"""
+""" The main view file, handles all get and post requests to create an Enquiry. """
 
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, UpdateView
 from django.conf import settings
