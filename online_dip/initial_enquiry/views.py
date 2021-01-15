@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, UpdateView
 from django.conf import settings
+from django.http import JsonResponse
 from .forms import CustomerDetailsForm, PropertyDetailsForm, EnquiryForm
 from .models import Enquiry
 from .helpers.providers import EnquiryProvider
@@ -44,6 +45,9 @@ def property_details(request):
         return redirect("customer_details")
 
     if request.method =="POST":
+        # Smell: need to validate ltv value
+        # doesnt need passing in because ill receive the loan value and the property value!
+        # can just pass values into what will be the LtvValidator
         form = PropertyDetailsForm(request.POST, use_required_attribute=False)
         if form.is_valid():
             property_details_data = form.cleaned_data
@@ -82,6 +86,34 @@ def property_details(request):
     }
     return render(request, "property_details.html", context, status=response_code)
 
+
+def calculate_ltv(request):
+
+    # convert to int?
+    try:
+        loan_amount = int(request.GET.get('loanamount', None))
+        property_value = int(request.GET.get('propertyvalue', None))
+    except:
+        loan_amount = 0
+        property_value = 0
+
+    # Calculate ratio of loan to value, then cap at 0.1 (≡100%)
+    ltv_result = min(float(loan_amount) / float(property_value), 1.0)
+    ltv_percentage = "{:.0%}".format(ltv_result)
+
+    if ltv_result <= 0.5:
+        ltv_css = "ltv_acceptable"
+        visibility_css = "hidden"
+    else:
+        ltv_css = "ltv_unacceptable"
+        visibility_css = "visible"
+
+    data = {
+        'ltv': ltv_percentage,
+        'ltv_css': ltv_css,
+        'visibility_css': visibility_css,
+    }
+    return JsonResponse(data)
 
 def thank_you(request):
     """ Page displayed on submission complete """

@@ -112,7 +112,7 @@
         }
 
     .field-prefix-group div:first-child {        
-        border-color: #555;        
+        border-color: #555;
         background-color: #333;
     }
 
@@ -120,7 +120,8 @@
         color: #555;
     }
 
-    /* Error Styling */
+    /* Validation */
+
     .error-summary {
         background: rgb(31, 31, 31);
         border-color:  #d4351c;
@@ -138,6 +139,30 @@
     .field-error {
         color: #d4351c;        
         background-image: url(../images/error_48px.svg);       
+    }
+
+    
+    .ltv_acceptable {
+        color: rgb(0, 231, 0);
+    }
+
+    .ltv_unacceptable {
+        color: red;
+    }
+
+    .ltv-desc, #ltv-toggle1 {
+        border-color: rgb(61, 75, 40);
+        background-color: rgb(36, 39, 31);
+    }
+
+    #ltv-toggle1 {
+        border-color: rgb(75, 40, 40);
+        background-color: rgb(39, 31, 31);
+    }
+
+    #ltv_value {        
+        border-color: #555;
+        background-color: #333;
     }
 
     /* Table */
