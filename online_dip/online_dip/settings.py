@@ -134,3 +134,8 @@ EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_EMAIL_HOST_PASSWORD')
 EMAIL_HOST_USER = os.environ.get('DJANGO_EMAIL_HOST_USER')
 EMAIL_PORT = os.environ.get('DJANGO_EMAIL_PORT')
 EMAIL_USE_SSL = True
+
+# NBS Settings
+
+# Represents percentage - Must be a number between 1 and 100
+MAX_LTV = 80

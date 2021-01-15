@@ -9,7 +9,7 @@
         color: rgb(170, 183, 192);
     }
 
-    input {        
+    .field input {        
         background: #333;
         border-color: #555;
         color: #fff;
@@ -68,7 +68,7 @@
         box-shadow: 0 0 1px 4px #ffbb00;        
     }
 
-    input:focus {
+    .field input:focus {
         box-shadow: 0 0 1px 4px #ffbb00;
         background-color: rgb(41, 41, 41);
     }
@@ -111,16 +111,18 @@
             box-shadow: 0 0 0 2px #ffbb00;
         }
 
-    .field-prefix-group div:first-child {        
-        border-color: #555;        
+    .field-prefix-group div:first-child, 
+    .field-suffix-group div:nth-child(2) {        
+        border-color: #555;
         background-color: #333;
     }
-
+    
     .field-hint {        
         color: #555;
     }
 
-    /* Error Styling */
+    /* Validation */
+
     .error-summary {
         background: rgb(31, 31, 31);
         border-color:  #d4351c;
@@ -138,6 +140,41 @@
     .field-error {
         color: #d4351c;        
         background-image: url(../images/error_48px.svg);       
+    }
+
+    
+    .ltv_acceptable {
+        color: rgb(0, 231, 0) !important;
+    }
+
+    .ltv_unacceptable {
+        color: red !important;
+    }
+
+    .ltv-desc, #ltv-toggle1 {
+        border-color: rgb(61, 75, 40);
+        background-color: rgb(36, 39, 31);
+    }
+
+    #ltv-toggle1 {
+        border-color: rgb(75, 40, 40);
+        background-color: rgb(39, 31, 31);
+    }
+
+    .field-ltv {        
+        border-color: #555;
+        background-color: #333;
+    }
+
+    .field-ltv input {
+        border: none;
+        background-color: inherit;
+    }
+
+    .field-ltv input:read-only {
+        box-shadow: none;
+        background-color: inherit;
+        cursor: default;
     }
 
     /* Table */

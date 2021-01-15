@@ -4,10 +4,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, UpdateView
 from django.conf import settings
+from django.http import JsonResponse
 from .forms import CustomerDetailsForm, PropertyDetailsForm, EnquiryForm
 from .models import Enquiry
 from .helpers.providers import EnquiryProvider
 from .helpers.mailer import EmailSender
+from .helpers.calculators import LTVCalculator
 
 
 def customer_details(request):
@@ -82,6 +84,29 @@ def property_details(request):
     }
     return render(request, "property_details.html", context, status=response_code)
 
+
+def calculate_ltv(request):
+
+    loan_amount = int(request.GET.get('loanamount', None))
+    property_value = int(request.GET.get('propertyvalue', None))
+
+    ltv = LTVCalculator(loan_amount, property_value)
+    ltv_value = ltv.get_value()
+
+    # Check if the value is within specified acceptance criteria
+    if ltv.is_acceptable():
+        ltv_css = "ltv_acceptable"
+        visibility_css = "hidden"
+    else:
+        ltv_css = "ltv_unacceptable"
+        visibility_css = "visible"
+
+    data = {
+        'ltv': ltv_value,
+        'ltv_css': ltv_css,
+        'visibility_css': visibility_css,
+    }
+    return JsonResponse(data)
 
 def thank_you(request):
     """ Page displayed on submission complete """
